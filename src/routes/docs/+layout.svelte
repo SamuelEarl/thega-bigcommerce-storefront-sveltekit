@@ -4,7 +4,7 @@
   import { Toast } from "$lib/client/components";
   import MobileHeader from "./MobileHeader.svelte";
   import Sidebar from "./Sidebar.svelte";
-  import "/src/assets/styles/main.css";
+  import "/src/lib/client/assets/styles/main.css";
   import "./docs-base.css";
 
   interface Props {
