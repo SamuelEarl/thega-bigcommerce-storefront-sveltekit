@@ -7,8 +7,16 @@ export default defineConfig({
 		port: 3000,
 	},
 	// build: {
-	// 	// Set `minify` to `false` to troubleshoot `error during build: undefined`.
-  //   minify: false,
+	// 	// This throws the following error: 
+	// 	// Entry module "src/routes/docs/+layout.svelte" cannot be external.
+	// 	rollupOptions: {
+	// 		external: (id) => {
+  //       // Exclude any module whose path includes "routes/docs".
+  //       return id.includes("routes/docs");
+  //     }
+	// 	}
+	// 	// // Set `minify` to `false` to troubleshoot `error during build: undefined`.
+  //   // minify: false,
   // },
 	plugins: [
 		// checker({ typescript: true }),
