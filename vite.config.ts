@@ -1,11 +1,19 @@
 import { defineConfig } from "vitest/config";
 import { sveltekit } from "@sveltejs/kit/vite";
+// import checker from "vite-plugin-checker";
 
 export default defineConfig({
 	server: {
 		port: 3000,
 	},
-	plugins: [sveltekit()],
+	// build: {
+  //   // Set to `false` to troubleshoot `error during build: undefined`.
+  //   minify: false,
+  // },
+	plugins: [
+		// checker({ typescript: true }),
+		sveltekit(),
+	],
 	test: {
 		expect: { requireAssertions: true },
 		projects: [

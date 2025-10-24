@@ -2,6 +2,26 @@
 
 This is a custom headless storefront for BigCommerce using SvelteKit and BigCommerce APIs.
 
+---
+
+## Home Page Content
+
+**THE GAME IS LIFE**
+
+For those who live and breathe sports and fitness—_the game is life_, and our gear powers every step forward.
+
+<a>Men</a> | <a>Women</a> | <a>Boys</a> | <a>Girls</a>
+
+---
+
+**COMFORT MEETS STYLE**
+
+Our sportswear offers unparalleled comfort while ensuring you look effortlessly chic.
+
+<a>Men</a> | <a>Women</a> | <a>Boys</a> | <a>Girls</a>
+
+---
+
 # sv
 
 Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).

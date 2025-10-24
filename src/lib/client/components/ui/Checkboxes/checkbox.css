@@ -1,0 +1,99 @@
+/* Custom Checkbox Styles (https://www.w3schools.com/howto/howto_css_custom_checkbox.asp) */
+/* The <Checkbox> and <CheckboxGroup> components use the same exact styles, so this file is simply imported into both components. */
+
+/* Customize the label (the container). */
+.fp-checkbox-label-wrapper {
+  display: inline-block;
+  position: relative;
+  /* padding-top: 1px; */
+  padding-left: var(--size-9);
+  cursor: pointer;
+  user-select: none;
+}
+
+.fp-checkbox-label-wrapper:last-child {
+  margin-bottom: var(--size-4);
+}
+
+/* Hide the browser's default checkbox. */
+.fp-checkbox-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Set the base outline styles for the checkbox. */
+.fp-checkbox-input ~ .fp-checkbox-checkmark {
+  outline-width: var(--outline-hidden);
+  outline-style: var(--outline-style);
+  outline-offset: var(--outline-offset);
+}
+
+/* When an unchecked checkbox is hovered or receives focus, add an outline to the checkbox that is the default outline color. */
+.fp-checkbox-input:hover ~ .fp-checkbox-checkmark,
+.fp-checkbox-input:focus ~ .fp-checkbox-checkmark {
+  outline-width: var(--outline-width);
+  outline-color: var(--outline-color);
+}
+
+/* When the checkbox is checked, add a primary background color and change the border color to match the background color. */
+.fp-checkbox-input:checked ~ .fp-checkbox-checkmark {
+  background-color: var(--primary-bg);
+  border-color: var(--primary-bg);
+}
+
+/* Show the checkmark when checked. */
+.fp-checkbox-input:checked ~ .fp-checkbox-checkmark:after {
+  display: block;
+}
+
+/* When a checked checkbox is hovered or receives focus, add an outline to the checkbox that is the primary color. */
+.fp-checkbox-input:checked:hover ~ .fp-checkbox-checkmark,
+.fp-checkbox-input:checked:focus ~ .fp-checkbox-checkmark {
+  outline-width: var(--outline-width);
+  outline-color: var(--primary-bg);
+}
+
+/* Create a custom checkbox. */
+/* The `top` style below will set the checkbox higher or lower in relation to the label text. The font family and font size that you set in your app will affect where the checkboxes are aligned in relation to the label text of the checkboxes. */
+.fp-checkbox-checkmark {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  height: var(--size-7);
+  width: var(--size-7);
+  border: var(--border);
+  border-radius: var(--radius);
+  background-color: var(--element-bg);
+}
+
+/* Create the checkmark/indicator (hidden when not checked). */
+.fp-checkbox-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  /* Style the checkmark/indicator. */
+  left: 7px;
+  top: -1px;
+  width: 10px;
+  height: 20px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+/* Disabled state */
+.fp-checkbox-input:disabled ~ .fp-checkbox-checkmark {
+  background-color: var(--element-bg-disabled);
+  color: var(--element-text-color-disabled);
+  border-color: var(--element-border-color-disabled);
+  pointer-events: none;
+}
+.fp-checkbox-input:disabled ~ .fp-checkbox-checkmark {
+  outline-width: var(--outline-hidden);
+}
+.fp-checkbox-label-wrapper.disabled {
+  pointer-events: none;
+}

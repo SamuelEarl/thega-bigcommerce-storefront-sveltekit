@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Favicons for mobile and desktop devices, which are generated at https://realfavicongenerator.net/ -->
+		<link rel="icon" type="image/png" href="%sveltekit.assets%/favicon-96x96.png" sizes="96x96" />
+		<link rel="icon" type="image/svg+xml" href="%sveltekit.assets%/favicon.svg" />
+		<link rel="shortcut icon" href="%sveltekit.assets%/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="%sveltekit.assets%/apple-touch-icon.png" />
+		<meta name="apple-mobile-web-app-title" content="THEGA" />
+		<link rel="manifest" href="%sveltekit.assets%/site.webmanifest" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>%sveltekit.error.message%</title>
+
+    <style>
+      *,
+      ::before,
+      ::after {
+        box-sizing: border-box; /* 1 */
+        border-width: 0; /* 2 */
+        border-style: solid; /* 2 */
+        border-color: #9ca3af; /* 2 */
+      }
+
+      body {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: "Proxima Nova", sans-serif;
+        background-image: radial-gradient(#e4547b, #b91d47);
+        color: white;
+      }
+
+      h1 {
+        margin-bottom: 40px;
+        font-size: 46px;
+      }
+
+      .status {
+        padding: 0px 30px;
+        border-right: 1px solid white;
+      }
+
+      #message {
+        padding: 0px 20px;
+      }
+
+      /* .instructions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 24px;
+      } */
+    </style>
+	</head>
+	<body>
+    <h1>
+      <span class="status">%sveltekit.status%</span>
+      <span id="message">%sveltekit.error.message%</span>
+    </h1>
+    <!-- <div class="instructions">
+      <h2>An error has occurred with your user session</h2>
+      <div>You may need to clear your cookies and try signing in again</div>
+    </div> -->
+  </body>
+</html>
