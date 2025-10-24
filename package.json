@@ -5,10 +5,11 @@
 	"type": "module",
 	"scripts": {
 		"dev:ORIG": "vite dev",
-		"__move_docs_to_root:COMMENT__": "https://stackoverflow.com/a/77196946/9453009",
+		"__move_docs_to_root:COMMENT__": "During `dev` the components docs should be available for developers on the `docs` route. This script is borrowed from here: https://stackoverflow.com/a/77196946/9453009",
 		"move_docs_to_root": "sh -c 'if [ -d docs ]; then mv docs src/routes/docs; fi'",
 		"dev": "bun move_docs_to_root && NODE_ENV='development' bun --env-file=.env --env-file=.env.development -- vite dev --host",
 		"build:ORIG": "vite build",
+		"__remove_docs_from_routes:COMMENT__": "The components docs should be removed from the production build so the production code bundle is smaller. This script is borrowed from here: https://stackoverflow.com/a/77196946/9453009",
 		"remove_docs_from_routes": "sh -c 'if [ -d src/routes/docs ]; then mv src/routes/docs docs; fi'",
 		"build": "bun remove_docs_from_routes && NODE_ENV='production' bun --env-file=.env --env-file=.env.production -- vite build",
 		"preview": "vite preview",

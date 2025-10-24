@@ -129,7 +129,7 @@
   .sidebar {
     min-height: 100%;
     padding-bottom: 50px;
-    background-color: var(--secondary-bg);
+    background-color: var(--primary-bg);
 
     & .title-wrapper {
       font-family: var(--cursive);

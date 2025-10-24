@@ -279,7 +279,7 @@
         padding: 0;
         padding-top: 20px;
         overflow-y: auto;
-        background-color: var(--secondary-bg);
+        background-color: var(--primary-bg);
 
         & .section-heading {
           padding-left: 15px;
@@ -310,12 +310,9 @@
                   margin-right: 10px;
                 } */
 
-                &:hover {
-                  background-color: var(--primary-bg);
-                }
-
-                &.active {
-                  background-color: var(--primary-bg);
+                &:hover, &:active {
+                  /* background-color: var(--secondary-bg); */
+                  color: var(--tertiary-bg);
                 }
               }
             }
