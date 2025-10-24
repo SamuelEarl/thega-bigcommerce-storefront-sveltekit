@@ -1,4 +1,4 @@
-# thega-bigcommerce-storefront-sveltekit
+# THEGA Storefront
 
 This is a custom headless storefront for BigCommerce using SvelteKit and BigCommerce APIs.
 

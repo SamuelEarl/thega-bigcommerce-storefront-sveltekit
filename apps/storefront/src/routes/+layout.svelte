@@ -1,8 +1,9 @@
 <script lang="ts">
   import { beforeNavigate, goto } from "$app/navigation";
 	import type { Snippet } from "svelte";
-	import { Toast } from "$lib/client/components";
-	import "$lib/client/assets/styles/main.css";
+	import { Toast } from "@repo/ui";
+  import "@repo/assets";
+	// import "$lib/client/assets/styles/main.css";
 
   interface Props {
     children?: Snippet;

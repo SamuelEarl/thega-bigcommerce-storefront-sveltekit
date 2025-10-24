@@ -1,5 +1,5 @@
 {
-	"name": "thega-bigcommerce-storefront-sveltekit",
+	"name": "@repo/storefront",
 	"private": true,
 	"version": "0.0.1",
 	"type": "module",
@@ -20,6 +20,8 @@
 		"check-types": "tsc --noEmit"
 	},
 	"dependencies": {
+		"@repo/assets": "workspace:*",
+		"@repo/ui": "workspace:*",
 		"d3": "^7.9.0",
 		"lodash-es": "^4.17.21",
 		"mathjs": "^15.0.0",
