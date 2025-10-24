@@ -7,7 +7,7 @@ export default defineConfig({
 		port: 3000,
 	},
 	// build: {
-  //   // Set to `false` to troubleshoot `error during build: undefined`.
+	// 	// Set `minify` to `false` to troubleshoot `error during build: undefined`.
   //   minify: false,
   // },
 	plugins: [

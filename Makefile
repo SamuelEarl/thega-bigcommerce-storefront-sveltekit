@@ -1,7 +1,7 @@
-dev:
+run-dev:
 	bun --bun run dev
 
-build:
+run-build:
 	bun --bun run build
 
 generate-css-icons:
