@@ -157,7 +157,7 @@
         background-color: var(--white);
 
         & .hero-image {
-          height: 730px;
+          height: 768px;
           background-image: url("src/lib/client/assets/images/hero-image-optimized.webp");
           background-repeat: no-repeat;
           background-attachment: fixed;
