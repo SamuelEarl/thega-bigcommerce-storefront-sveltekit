@@ -10,83 +10,20 @@
 	// const mainNav = mainNavContext;
 	const mainNav = [
     {
-			icon: "mdi:chart-finance",
-			label: "Dashboard",
-			url: "/dashboard",
-		},
-		// {
-		// 	icon: "mdi:home",
-		// 	label: "Welcome",
-		// 	url: "/welcome",
-		// },
-		{
-			icon: "octicon:goal-24",
-			label: "Goals",
-			url: "/goals",
+			label: "Men",
+			url: "/collections/men",
 		},
 		{
-			icon: "mdi:feature-highlight",
-			label: "Manage Add-ons",
-			url: "/add-ons",
-			addOns: [
-				{
-					icon: "ri:bank-line",
-					label: "Bank Accounts",
-					url: "/bank-accounts"
-				},
-				{
-					icon: "bx:spreadsheet",
-					label: "Budgets",
-					url: "/budgets"
-				},
-				{
-					icon: "mdi:calendar",
-					label: "Bill Schedule",
-					url: "/bill-schedule",
-				},
-				{
-					icon: "mdi:handcuffs",
-					label: "Debt Elimination",
-					url: "/debt-elimination",
-				},
-			],
-		},
-		// Add-on features could be listed...
-    // {
-    //   icon: "ri:bank-line",
-    //   label: "Bank Accounts",
-    //   url: "/bank-accounts"
-    // },
-		// {
-    //   icon: "bx:spreadsheet",
-    //   label: "Budgets",
-    //   url: "/budgets"
-    // },
-		// {
-		// 	icon: "mdi:calendar",
-		// 	label: "Bill Schedule",
-		// 	url: "/bill-schedule",
-		// },
-    // {
-		// 	icon: "mdi:handcuffs",
-		// 	label: "Debt Elimination",
-		// 	url: "/debt-elimination",
-		// },
-		// ...between these two comments.
-    {
-      icon: "carbon:user-profile",
-      label: "Profile",
-      url: "/profile",
-    },
-		{
-			icon: "ri:settings-3-line",
-			label: "Settings",
-			url: "/settings",
+			label: "Women",
+			url: "/collections/wommen",
 		},
 		{
-			icon: "eos-icons:admin-outlined",
-			label: "Admin",
-			url: "/admin",
+			label: "Boys",
+			url: "/collections/boys",
+		},
+		{
+			label: "Girls",
+			url: "/collections/girls",
 		},
 	];
 </script>

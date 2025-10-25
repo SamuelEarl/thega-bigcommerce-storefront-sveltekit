@@ -1,18 +1,9 @@
 /* This file should include font definitions and styles for those font definitions. */
 
 @font-face {
-  font-family: "Designers Bold";
-  src: local("Designers Bold"),
-    url("../fonts/designers-bold/DesignersBold.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 400;
-}
-
-
-@font-face {
-  font-family: "Cherry Cream Soda";
-  src: local("Cherry Cream Soda"),
-    url("../fonts/cherry-cream-soda/CherryCreamSoda-Regular.ttf") format("truetype");
+  font-family: "Michroma";
+  src: local("Michroma"),
+    url("../fonts/michroma/Michroma-Regular.ttf") format("truetype");
   font-style: normal;
   font-weight: 400;
 }

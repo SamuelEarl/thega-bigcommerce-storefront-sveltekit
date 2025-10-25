@@ -183,9 +183,8 @@
   /* TYPOGRAPHY */
   /* ---------- */
   /* Font Families */
-  --sans-serif: "Proxima Nova", sans-serif;
-  --vintage: "Designers Bold", serif;
-  --display: "Cherry Cream Soda", sans-serif;
+  --headings: "Michroma", sans-serif;
+  --body: "Proxima Nova", sans-serif;
 	--monospace: "Source Code Pro", "monospace";
 
   /* Line Heights */
