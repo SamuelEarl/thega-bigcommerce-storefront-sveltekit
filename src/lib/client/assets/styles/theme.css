@@ -6,6 +6,10 @@
 
 /* Many of these ideas are borrowed from shadcn-svelte, Open Props, and Tailwind. */
 
+/* COMMENT ABOUT ICONS */
+/* I will use the Material Symbols icon set by Google (because it has the most icons). */
+/* I will use the sharp outline versions of each icon (instead of the rounded and filled versions). */
+
 :where(html) {
   /* ------------- */
   /* COLOR PALETTE */
@@ -35,25 +39,25 @@
   /* Neutral Colors */
   /* INSTRUCTIONS: You can change any of these values, but do not change the variable names. */
   /* NOTE: Fanny Pack does not use a transparent variable, like this `--transparent: transparent;`, because that does not make sense. Some people might want their --white or --black variables to be just a little off of pure white or black, so it makes sense to have those variables. But transparent is transparent. There is no such thing as "off transparent". */
-  --white: #ffffff;
-  --black: #000000;
 
-  /* These are shades and tints of #50404d (i.e. Purple Taupe). 
-  See https://www.colorhexa.com/50404d. */
-  --neutral-1: #f5f5f5;
-  --neutral-2: #e0e0e0;
-  --neutral-3: #cccccc;
-  --neutral-4: #b8b8b8;
-  --neutral-5: #a3a3a3;
-  --neutral-6: #8f8f8f;
-  --neutral-7: #7a7a7a;
-  --neutral-8: #666666;
-  --neutral-9: #525252;
-  --neutral-10: #3d3d3d;
-  --neutral-11: #292929;
-  --neutral-12: #141414;
-  --neutral-13: #000000;
+  /* These are shades and tints of #191919.
+  See https://www.colorhexa.com/191919. */
+  --neutral-1: #fbfbfb;
+  --neutral-2: #f1f1f1;
+  --neutral-3: #dddddd;
+  --neutral-4: #cacaca;
+  --neutral-5: #b6b6b6;
+  --neutral-6: #a2a2a2;
+  --neutral-7: #8f8f8f;
+  --neutral-8: #7b7b7b;
+  --neutral-9: #676767;
+  --neutral-10: #545454;
+  --neutral-11: #404040;
+  --neutral-12: #2d2d2d;
+  --neutral-13: #191919;
 
+  --white: var(--neutral-1);
+  --black: var(--neutral-13);
 
   /* ----------- */
   /* MAIN COLORS */
