@@ -19,6 +19,8 @@ export default defineConfig({
   //   // minify: false,
   // },
 	plugins: [
+		// vite-plugin-checker will add type checking and linting support for Vite during dev and build.
+		// This can help troubleshoot errors. See https://vite-plugin-checker.netlify.app/.
 		// checker({ typescript: true }),
 		sveltekit(),
 	],
