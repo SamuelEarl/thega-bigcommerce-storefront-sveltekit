@@ -202,6 +202,13 @@ Whatever you pass in between the opening `<Link>` tag and the closing `</Link>` 
       "<code>auto</code> will be wide enough to fit the contents of the button. <code>full</code> will fill the width of the button's parent element. NOTE: This prop only works when <code>btnStyles</code> is <code>true</code>.",
     ],
     [
+      "<code>underline</code>",
+      "<code>boolean</code>", 
+      "<code>true</code>, <code>false</code>", 
+      "<code>true</code>",
+      "<code>true</code> will show an underline. <code>false</code> will NOT show an underline. NOTE: This prop will NOT work if you use the <code>btnStyles</code> prop.",
+    ],
+    [
       "<code>disabled</code>",
       "<code>boolean</code>",
       "<code>true</code>, <code>false</code>",

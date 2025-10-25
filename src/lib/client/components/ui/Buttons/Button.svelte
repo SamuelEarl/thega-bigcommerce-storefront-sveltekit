@@ -1,7 +1,6 @@
 <!-- TODO: Can I remove this migration note or do I still need to address this: @migration-task Error while migrating Svelte code: migrating this component would require adding a `$props` rune but there's already a variable named props.
      Rename the variable and try again or migrate by hand. -->
 <script lang="ts">
-  import { Icon } from "../Icons";
   import type { Snippet } from "svelte";
   import { getBtnColors, getElementSizes, getElementWidth } from "../../defaults";
   import type { IColors, ISizes } from "../../defaults";
@@ -49,6 +48,9 @@
     ...restProps
   }: Props = $props();
 
+  const [iconSet, iconName] = $state(icon.split(":"));
+  const [disabledIconSet, disabledIconName] = $state(disabledIcon.split(":"));
+
   // If no button text snippets are passed to this component, then `textSnippetsExist` will be `false`.
   const textSnippetsExist = !!children || !!disabledContent;
 
@@ -76,7 +78,11 @@
 <button
   {type}
   class="fp-btn"
-  style={`${getBtnColors(colors, variant, inverted)} ${getElementSizes(sizes, true).all} ${getElementWidth(width)}`}
+  style={`
+    ${getBtnColors(colors, variant, inverted)} 
+    ${getElementSizes(sizes, true).all} 
+    ${getElementWidth(width)}
+  `}
   disabled={disabled || formIsInvalid}
   {...restProps}
   {onclick}
@@ -100,20 +106,39 @@
   {#if icon && disabledIcon}
     <!-- If the form is invalid, then do NOT show the disabled icon. See the note above the `formIsInvalid` conditional check for the button text. -->
     {#if type === "submit" && formIsInvalid}
-      <Icon icon={icon} style={`${getIconStyles()} transform:rotate(${rotateIcon});`} />
+      <span
+        class={`
+          icon--${iconSet}
+          icon--${iconSet}--${iconName}
+        `}
+        style={`
+          ${getIconStyles()} 
+          transform:rotate(${rotateIcon});
+        `}
+      ></span>
     <!-- If the button is disabled, then... -->
     {:else if disabled}
-      <!-- NOTE: You can NOT dynamically bind classes to a component instance, so the <Icon /> component has to be repeated a couple of times - once for the "fp-spin" class and once without. -->
-      {#if disabledIconShouldSpin}
-        <!-- ...show a spinning disabled icon. -->
-        <Icon icon={disabledIcon} style={`${getIconStyles()}`} class="fp-spin" />
-      {:else}
-        <!-- ...or show a non-spinning disabled icon. -->
-        <Icon icon={disabledIcon} style={`${getIconStyles()} transform:rotate(${rotateDisabledIcon});`} />
-      {/if}
+      <!-- If `disabledIconShouldSpin` is true, then show a spinning disabled icon. Else show a non-spinning disabled icon. -->
+      <span
+        class={`
+          icon--${disabledIconSet} 
+          icon--${disabledIconSet}--${disabledIconName} 
+          ${disabledIconShouldSpin ? "fp-spin" : ""}
+        `}
+        style={`${getIconStyles()}`}
+      ></span>
     <!-- If the button is not disabled, then show the icon. -->
     {:else}
-      <Icon icon={icon} style={`${getIconStyles()} transform:rotate(${rotateIcon});`} />
+      <span
+        class={`
+          icon--${iconSet} 
+          icon--${iconSet}--${iconName}
+        `}
+        style={`
+          ${getIconStyles()} 
+          transform:rotate(${rotateIcon});
+        `}
+      ></span>
     {/if}
   {/if}
 </button>

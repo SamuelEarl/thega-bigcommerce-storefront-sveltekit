@@ -13,7 +13,7 @@
   }: Props = $props();
 
   // Split the `icon` string into the iconSet and iconName strings.
-  const [iconSet, iconName] = icon.split(":"); 
+  const [iconSet, iconName] = icon.split(":");
 </script>
 
 <span class={`icon--${iconSet} icon--${iconSet}--${iconName}`} {...restProps}></span>

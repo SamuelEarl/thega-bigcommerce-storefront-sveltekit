@@ -16,8 +16,9 @@
   // TODO: IMPLEMENT ROUTE GUARDS HERE WITH KINDE. There is also a beforeNavigate method in the "src/routes/(private)/+layout.svelte" file, so I need to figure out which location makes the most sense for this method. Since I am trying to protect private routes it might make more sense to have a route guard in the private layout file.
   beforeNavigate(({ to }) => {
     console.log("NAVIGATING TO ROUTE:", to);
+    console.log("TODO: DO I NEED TO IMPLEMENT ROUTE GUARDS?");
     if (to?.route.id?.startsWith("/(private)")) {
-      console.log("TODO: IMPLEMENT ROUTE GUARDS HERE WITH KINDE");
+      // Route guard would go here...
       // Check if user is authenticated.
       // If the user is NOT authenticated, then redirect them to the home page.
       // goto("/");

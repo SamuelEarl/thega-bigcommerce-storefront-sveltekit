@@ -1,11 +1,12 @@
 <script lang="ts">
   import { beforeNavigate, goto } from "$app/navigation";
+  import { page } from "$app/state";
 	import type { Snippet } from "svelte";
   import Header from "./Header.svelte";
-	import { Button, Icon } from "$lib/client/components";
+	import { Icon, Link } from "$lib/client/components";
 	import "$lib/client/assets/styles/main.css";
   import LogoWhite from "$lib/client/assets/images/logo-and-name-horizontal-white-fbfbfb.svg";
-  // import LogoBlack from "$lib/client/assets/images/logo-and-name-horizontal-black-191919.svg";
+	import HeroImage from "./HeroImage.svelte";
 
   interface Props {
     children?: Snippet;
@@ -13,13 +14,10 @@
 
   let { children }: Props = $props();
 
+  let currentPath = $derived(page.url.pathname);
+
   const iconSizes = "font-size: 24px";
-
-  // # State Management for User Permissions
-  // * TODO: I don't think I need to worry about checking the user's authentication status in the client side because that is already handled on the server with each page request. However, I will need to have access to the user's permissions array in the client side to show or hide different features in the UI. I think I would call the `/auth/get-current-user` API endpoint from the `+layout.svelte` file and store that information in a store with context (see the following notes). The Kinde SvelteKit SDK used the `+layout.server.ts` file to check for authentication and then do some other stuff, so I think the `+layout.svelte` file would make sense to handle some of this auth stuff.
-  // * I also need to be able to update a user's permissions when they subscribe to new features or cancel their subscription. (See this file: src/routes/(private)/iam/update-permissions/+server.ts) I think that would be done using the same techniques (e.g. load function plus pass data to components or use the $page.data store) and I would need to set a new cookie with those permissions.
-
-  // TODO: IMPLEMENT ROUTE GUARDS HERE WITH KINDE. There is also a beforeNavigate method in the "src/routes/(private)/+layout.svelte" file, so I need to figure out which location makes the most sense for this method. Since I am trying to protect private routes it might make more sense to have a route guard in the private layout file.
+  let btnDisabled = $state(false);
 
   /**
    * Reset the page scroll position to the top on navigation.
@@ -48,10 +46,10 @@
       </div>
       <nav>
         <ul>
-          <li>Men</li>
-          <li>Women</li>
-          <li>Boys</li>
-          <li>Girls</li>
+          <li><Link href="/collections/men" variant="tertiary" underline={false}>MEN</Link></li>
+          <li><Link href="/collections/women" variant="tertiary" underline={false}>WOMEN</Link></li>
+          <li><Link href="/collections/boys" variant="tertiary" underline={false}>BOYS</Link></li>
+          <li><Link href="/collections/girls" variant="tertiary" underline={false}>GIRLS</Link></li>
         </ul>
       </nav>
       <div class="icons-wrapper">
@@ -62,26 +60,9 @@
     </div>
   </header>
   <main id="main">
-    <div class="hero-image">
-      <div class="hero-content">
-        <h1>THE GAME IS LIFE</h1>
-        <p>
-          For those who live and breathe sports and fitness
-          <br>
-          <em><strong>THE GAME IS LIFE</strong></em>
-          <br>
-          and our gear powers every step forward.
-        </p>
-        <div class="cta">
-          <Button
-            variant="tertiary"
-            onclick={() => alert("Button has been clicked")}
-          >
-            SHOP NOW
-          </Button>
-        </div>
-      </div>
-    </div>
+    {#if currentPath === "/"}
+      <HeroImage />
+    {/if}
     <div class="main-content">
       {@render children?.()}
     </div>
@@ -155,41 +136,6 @@
 				height: 100vh;
 				overflow-y: auto;
         background-color: var(--white);
-
-        & .hero-image {
-          height: 768px;
-          background-image: url("src/lib/client/assets/images/hero-image-optimized.webp");
-          background-repeat: no-repeat;
-          background-attachment: fixed;
-          background-position: center;
-          background-size: cover;
-          margin-bottom: 20px;
-          display: flex;
-          justify-content: end;
-          align-items: center;
-
-          & .hero-content {
-            margin-right: 100px;
-            text-align: center;
-            padding: 20px;
-            /* background-color: rgba(0, 0, 0, 0.2); */
-            color: var(--old-gold);
-
-            h1 {
-              font-size: var(--size-11);
-              font-weight: bold;
-            }
-
-            p {
-              font-size: var(--size-6);
-            }
-
-            .cta {
-              display: flex;
-              justify-content: center;
-            }
-          }
-        }
 
         & .main-content {
           max-width: 1535px;

@@ -11,6 +11,7 @@
     colors?: IColors | null;
     sizes?: ISizes | null;
     width?: "auto" | "full";
+    underline?: boolean;
     disabled?: boolean;
     disabledContent?: Snippet;
     children?: Snippet;
@@ -24,6 +25,7 @@
     colors = null,
     sizes = null,
     width = "auto",
+    underline = true,
     disabled = false,
     disabledContent,
     children,
@@ -55,7 +57,7 @@
     {href}
     {...restProps}
     class="fp-link link-styles"
-    style={`${getLinkColor(variant)}`}
+    style={`${getLinkColor(variant)} ${underline ? "border-bottom: 1px dotted;" : ""}`}
     class:disabled={disabled}
     tabindex={disabled ? -1 : 0}
   >
@@ -78,7 +80,6 @@
       cursor: pointer;
 
       &.link-styles {
-        border-bottom: 1px dotted;
 
         &:hover {
           border-bottom-color: transparent !important;
