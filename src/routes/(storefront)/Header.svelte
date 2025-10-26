@@ -1,16 +1,19 @@
 <script lang="ts">
+	import { tick } from "svelte";
 	import { afterNavigate } from "$app/navigation";
 	import { Button, Icon, Link } from "$lib/client/components";
 	// import MainNav from "./MainNav.svelte";
 	import LogoWhite from "$lib/client/assets/images/logo-and-name-horizontal-white-fbfbfb.svg";
 
 	let mainNavContainer: HTMLDivElement;
+	let subnavContainer: HTMLDivElement;
 	// let showMainNav = $state(false);
 
 	// On mobile close the MainNav after a user navigates so it
 	// is not still displaying after a user has clicked a link.
 	afterNavigate(async () => {
-		mainNavContainer.style.right = "110vw"
+		if (mainNavContainer) mainNavContainer.style.right = "110vw";
+		if (subnavContainer) subnavContainer.style.right = "110vw";
 	});
 
 	const mainNav = {
@@ -96,9 +99,14 @@
 		},
 	];
 
-	function getActiveNav() {
+	function getActiveSubmenu() {
 		const displayNav = mainNav.menu.find(menu => menu.label === activeNav);
 		return displayNav?.submenu;
+	}
+
+	function getMainMenuItemURL() {
+		const displayNav = mainNav.menu.find(menu => menu.label === activeNav);
+		return displayNav?.url;
 	}
 </script>
 
@@ -118,18 +126,10 @@
 		<div class="logo-wrapper">
 			<a href="/"><img src={LogoWhite} class="logo" alt="logo" /></a>
 		</div>
-		<div class="main-nav" bind:this={mainNavContainer}>
+		<div class="main-nav-container" bind:this={mainNavContainer}>
 			<div class="menu-top-btns">
-					<div class="back-to-main-menu-btn-container">
-						{#if activeNav !== "MAIN"}
-							<Button
-								sizes={{ pv:0, ph:0 }}
-								onclick={() => activeNav = "MAIN"}
-							>
-								<Icon icon="material-symbols:chevron-left" style="font-size: var(--size-8)" /> MAIN
-							</Button>
-						{/if}
-					</div>
+				<!-- This empty <div> is used as a spacer element so the close button will align properly to the right. -->
+				<div></div>
 				<div class="close-menu-btn-container">
 					<Button
 						sizes={{ pv:0, ph:0 }}
@@ -144,31 +144,78 @@
 					<div><Icon icon={icon.icon} style={icon.size} /></div>
 				{/each}
 			</div>
-			{#if activeNav === "MAIN"}
-				<nav>
-					<ul>
-						{#each mainNav.menu as item}				
-							<li>
-								<Button onclick={() => activeNav = item.label}>
-									{item.label}
-								</Button>
-							</li>
-						{/each}
-					</ul>
-				</nav>
-			{:else}
-				<nav>
-					<ul>
-						{#each getActiveNav() as item}
-							<li>
-								<Link href={item.url} variant="tertiary" underline={false}>
-									{item.label}
-								</Link>
-							</li>
-						{/each}
-					</ul>
-				</nav>
-			{/if}
+			<nav>
+				<ul>
+					{#each mainNav.menu as item}				
+						<li>
+							<button
+								style="width: 100%; display: flex; justify-content: space-between;"
+								onclick={() => {
+									// Set the `activeNav` to the subnav that was clicked.
+									activeNav = item.label;
+									// Display the subnav container element.
+									subnavContainer.style.right = "0"
+								}}
+							>
+									{item.label} <Icon icon="material-symbols:chevron-right" style="font-size: var(--size-8); color: var(--old-gold);" />
+							</button>
+						</li>
+					{/each}
+				</ul>
+			</nav>
+		</div>
+		<div class="subnav-container" bind:this={subnavContainer}>
+			<div class="menu-top-btns">
+					<div class="back-to-main-menu-btn-container">
+						{#if activeNav !== "MAIN"}
+							<Button
+								sizes={{ pv:0, ph:0 }}
+								onclick={() => {
+									activeNav = "MAIN";
+									// Hide the subnav container.
+									subnavContainer.style.right = "110vw";
+									// Display the main nav container.
+									mainNavContainer.style.right = "0";
+								}}
+							>
+								<Icon icon="material-symbols:chevron-left" style="font-size: var(--size-8)" /> MAIN
+							</Button>
+						{/if}
+					</div>
+				<div class="close-menu-btn-container">
+					<Button
+						sizes={{ pv:0, ph:0 }}
+						onclick={() => {
+							// Hide both nav containers.
+							mainNavContainer.style.right = "110vw";
+							subnavContainer.style.right = "110vw";
+						}}
+					>
+						<Icon icon="material-symbols:close" style="font-size: var(--size-8)" />
+					</Button>
+				</div>
+			</div>
+			<div class="icons-wrapper">
+				{#each iconBtns as icon}
+					<div><Icon icon={icon.icon} style={icon.size} /></div>
+				{/each}
+			</div>
+			<nav>
+				<h3>
+					<Link href={getMainMenuItemURL()} variant="tertiary" underline={false}>
+						{activeNav}
+					</Link>
+				</h3>
+				<ul>
+					{#each getActiveSubmenu() as item}
+						<li>
+							<Link href={item.url} variant="tertiary" underline={false}>
+								{item.label}
+							</Link>
+						</li>
+					{/each}
+				</ul>
+			</nav>
 		</div>
 		<div>
 			<Icon icon="material-symbols:menu" style="font-size: var(--size-8); color: transparent" />
@@ -204,7 +251,7 @@
 					}
 				}
 
-				& .main-nav {
+				& .main-nav-container, & .subnav-container {
 					display: flex;
 					flex-direction: column;
 					position: absolute;
@@ -215,7 +262,6 @@
 					overflow-y: auto;
 					padding: 15px;
 					background-color: var(--black);
-					border-right: 1px solid var(--old-gold);
 					z-index: 100;
 					transition: right 0.25s ease;
 
@@ -229,7 +275,7 @@
 						display: flex;
 						justify-content: space-around;
 						align-items: center;
-						gap: 0 20px;
+						margin-bottom: 20px;
 
 						& :global(.icon--material-symbols:hover) {
 							color: var(--old-gold);
@@ -240,13 +286,13 @@
 						flex: 1;
 
 						& ul {
-							display: flex;
+							/* display: flex;
 							flex-direction: column;
 							justify-content: center;
-							gap: 0 20px;
+							gap: 0 20px; */
 							list-style-type: none;
 							padding: 0;
-							font-size: 20px;
+							font-size: var(--size-5);
 
 							& li {
 								margin: 0;
