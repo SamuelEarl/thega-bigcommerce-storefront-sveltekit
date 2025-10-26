@@ -70,8 +70,6 @@
   --secondary-fg: var(--black);
   --tertiary-bg: var(--old-gold);
   --tertiary-fg: var(--black);
-  --accent-bg: var(--old-gold);
-  --accent-fg: var(--black);
   --alert-bg: var(--dark-red);
   --alert-fg: var(--white);
 

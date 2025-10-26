@@ -5,7 +5,7 @@
   import Header from "./Header.svelte";
 	import { Icon, Link } from "$lib/client/components";
 	import "$lib/client/assets/styles/main.css";
-  import LogoWhite from "$lib/client/assets/images/logo-and-name-horizontal-white-fbfbfb.svg";
+  // import LogoWhite from "$lib/client/assets/images/logo-and-name-horizontal-white-fbfbfb.svg";
 	import HeroImage from "./HeroImage.svelte";
 
   interface Props {
@@ -15,9 +15,6 @@
   let { children }: Props = $props();
 
   let currentPath = $derived(page.url.pathname);
-
-  const iconSizes = "font-size: 24px";
-  let btnDisabled = $state(false);
 
   /**
    * Reset the page scroll position to the top on navigation.
@@ -38,8 +35,8 @@
 </svelte:head>
 
 <div class="layout">
-  <!-- <Header /> -->
-  <header>
+  <Header />
+  <!-- <header>
     <div class="header-content">
       <div class="logo-wrapper">
         <a href="/"><img src={LogoWhite} class="logo" alt="logo" /></a>
@@ -58,7 +55,7 @@
         <div><Icon icon="material-symbols:person-outline" style={iconSizes} /></div>
       </div>
     </div>
-  </header>
+  </header> -->
   <main id="main">
     {#if currentPath === "/"}
       <HeroImage />
@@ -76,13 +73,13 @@
 			flex-direction: column;
 			min-height: 100vh;
 
-      & header {
+      /* & header {
         position: sticky;
         top: 0;
         background-color: var(--black);
 
         & .header-content {
-          /* The hero image is 1536px wide. So I want to give the content a max width that equals the --xl-max media query. */
+          The hero image is 1536px wide. So I want to give the content a max width that equals the --xl-max media query.
           max-width: 1535px;
           margin: 0 auto;
           padding: 0 15px;
@@ -129,7 +126,7 @@
             }
           }
         }
-      }
+      } */
 
 			& main {
         flex: 1;

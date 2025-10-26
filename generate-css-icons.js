@@ -22,8 +22,11 @@ import { locate } from "@iconify/json";
       "search",
       "person-outline",
       "shopping-bag-outline-sharp",
-      "keyboard-double-arrow-down",
       "arrow-cool-down",
+      "menu",
+      "close",
+      "chevron-left",
+      "chevron-right",
     ],
     "icomoon-free": [
       "spinner2",
