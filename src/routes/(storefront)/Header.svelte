@@ -1,17 +1,14 @@
 <script lang="ts">
-	import { tick } from "svelte";
 	import { afterNavigate } from "$app/navigation";
 	import { Button, Icon, Link } from "$lib/client/components";
-	// import MainNav from "./MainNav.svelte";
 	import LogoWhite from "$lib/client/assets/images/logo-and-name-horizontal-white-fbfbfb.svg";
 
 	let mainNavContainer: HTMLDivElement;
 	let subnavContainer: HTMLDivElement;
-	// let showMainNav = $state(false);
 
-	// On mobile close the MainNav after a user navigates so it
-	// is not still displaying after a user has clicked a link.
-	afterNavigate(async () => {
+	// On mobile close the nav containers after a user navigates so they
+	// are not still displaying after a user has clicked a link.
+	afterNavigate(() => {
 		if (mainNavContainer) mainNavContainer.style.right = "110vw";
 		if (subnavContainer) subnavContainer.style.right = "110vw";
 	});
@@ -79,7 +76,6 @@
 	};
 
 	let activeNav = "MAIN";
-	console.log("activeNav:", activeNav);
 
 	const iconBtns = [
 		{
@@ -117,6 +113,7 @@
 				sizes={{ pv:0, ph:0 }}
 				onclick={() => {
 					activeNav = "MAIN";
+					// Display the main nav container.
 					mainNavContainer.style.right = "0";
 				}}
 			>
@@ -126,6 +123,10 @@
 		<div class="logo-wrapper">
 			<a href="/"><img src={LogoWhite} class="logo" alt="logo" /></a>
 		</div>
+		<div>
+			<Icon icon="material-symbols:menu" style="font-size: var(--size-8); color: transparent;" />
+		</div>
+		
 		<div class="main-nav-container" bind:this={mainNavContainer}>
 			<div class="menu-top-btns">
 				<!-- This empty <div> is used as a spacer element so the close button will align properly to the right. -->
@@ -133,7 +134,10 @@
 				<div class="close-menu-btn-container">
 					<Button
 						sizes={{ pv:0, ph:0 }}
-						onclick={() => mainNavContainer.style.right = "110vw"}
+						onclick={() => {
+							// Hide the main nav container.
+							mainNavContainer.style.right = "110vw";
+						}}
 					>
 						<Icon icon="material-symbols:close" style="font-size: var(--size-8)" />
 					</Button>
@@ -153,7 +157,7 @@
 								onclick={() => {
 									// Set the `activeNav` to the subnav that was clicked.
 									activeNav = item.label;
-									// Display the subnav container element.
+									// Display the subnav container.
 									subnavContainer.style.right = "0"
 								}}
 							>
@@ -164,6 +168,7 @@
 				</ul>
 			</nav>
 		</div>
+
 		<div class="subnav-container" bind:this={subnavContainer}>
 			<div class="menu-top-btns">
 					<div class="back-to-main-menu-btn-container">
@@ -178,7 +183,7 @@
 									mainNavContainer.style.right = "0";
 								}}
 							>
-								<Icon icon="material-symbols:chevron-left" style="font-size: var(--size-8)" /> MAIN
+								<Icon icon="material-symbols:chevron-left" style="font-size: var(--size-8); color: var(--old-gold);" /> MAIN
 							</Button>
 						{/if}
 					</div>
@@ -201,15 +206,15 @@
 				{/each}
 			</div>
 			<nav>
-				<h3>
+				<h4>
 					<Link href={getMainMenuItemURL()} variant="tertiary" underline={false}>
 						{activeNav}
 					</Link>
-				</h3>
+				</h4>
 				<ul>
 					{#each getActiveSubmenu() as item}
 						<li>
-							<Link href={item.url} variant="tertiary" underline={false}>
+							<Link href={item.url} variant="secondary" underline={false}>
 								{item.label}
 							</Link>
 						</li>
@@ -217,9 +222,7 @@
 				</ul>
 			</nav>
 		</div>
-		<div>
-			<Icon icon="material-symbols:menu" style="font-size: var(--size-8); color: transparent" />
-		</div>
+
 	</div>
 </header>
 
@@ -258,8 +261,7 @@
 					top: 0;
 					right: 110vw;
 					width: 100vw;
-					min-height: 100vh;
-					overflow-y: auto;
+					height: 100vh;
 					padding: 15px;
 					background-color: var(--black);
 					z-index: 100;
@@ -284,12 +286,13 @@
 
 					& nav {
 						flex: 1;
+						overflow-y: auto;
+
+						& h4 {
+							padding: 0 10px;
+						}
 
 						& ul {
-							/* display: flex;
-							flex-direction: column;
-							justify-content: center;
-							gap: 0 20px; */
 							list-style-type: none;
 							padding: 0;
 							font-size: var(--size-5);
