@@ -27,7 +27,7 @@
 </script>
 
 <svelte:head>
-	<title>THEGA | THE GAME IS LIFE</title>
+	<title>THEGA SPORTSWEAR | THE GAME IS LIFE</title>
 </svelte:head>
 
 <Toast />
