@@ -38,7 +38,7 @@
 <p>Make sure to submit your problem report within 15 days of the delivery date or the estimated delivery date. We're not able to accept reports filed after this timeframe.</p>
 
 <ol>
-  <li>Go to our <Link href="/contact-us">Contact Us</Link> page to contact us.</li>
+  <li>Go to our <Link href="/contact-us">Contact Us</Link> page and use either method to contact us.</li>
   <li>Enter <strong>Problem Report</strong> as the subject line.</li>
   <li>Describe the issue in detail and, if relevant, upload photos. To avoid delays, please include clear images with your initial report. For faster resolution, ensure your photos follow our guidelines. See the heading "Photo guidelines when submitting a problem report" below.</li>
 </ol>
