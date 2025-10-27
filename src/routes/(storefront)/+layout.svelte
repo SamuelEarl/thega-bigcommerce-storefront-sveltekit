@@ -36,26 +36,6 @@
 
 <div class="layout">
   <Header />
-  <!-- <header>
-    <div class="header-content">
-      <div class="logo-wrapper">
-        <a href="/"><img src={LogoWhite} class="logo" alt="logo" /></a>
-      </div>
-      <nav>
-        <ul>
-          <li><Link href="/collections/men" variant="tertiary" underline={false}>MEN</Link></li>
-          <li><Link href="/collections/women" variant="tertiary" underline={false}>WOMEN</Link></li>
-          <li><Link href="/collections/boys" variant="tertiary" underline={false}>BOYS</Link></li>
-          <li><Link href="/collections/girls" variant="tertiary" underline={false}>GIRLS</Link></li>
-        </ul>
-      </nav>
-      <div class="icons-wrapper">
-        <div><Icon icon="material-symbols:search" style={iconSizes} /></div>
-        <div><Icon icon="material-symbols:shopping-bag-outline-sharp" style="font-size: 22px;" /></div>
-        <div><Icon icon="material-symbols:person-outline" style={iconSizes} /></div>
-      </div>
-    </div>
-  </header> -->
   <main id="main">
     {#if currentPath === "/"}
       <HeroImage />
@@ -138,7 +118,7 @@
           max-width: 1535px;
           margin: 0 auto;
           padding: 0 15px;
-          /* padding-top: 80px; */
+          padding-top: var(--size-6);
         }
 			}
 

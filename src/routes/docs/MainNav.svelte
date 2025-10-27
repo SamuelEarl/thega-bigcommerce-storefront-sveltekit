@@ -90,14 +90,14 @@
           url: "/grids",
         },
         {
-          icon: "carbon:currency-dollar",
-          label: "Inputs (currency)",
-          url: "/inputs/currency",
-        },
-        {
           icon: "mdi:letter-i-box-outline",
           label: "Icons",
           url: "/icons",
+        },
+        {
+          icon: "carbon:currency-dollar",
+          label: "Inputs (currency)",
+          url: "/inputs/currency",
         },
         {
           icon: "radix-icons:input",

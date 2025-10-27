@@ -28,15 +28,12 @@ export function getBtnColors(colors: IColors | null = null, variant: string, inv
   }
   // Return pre-defined colors, which have already been defined in the theme.css file.
   else {
-    // The border-color will be the same whether the btn is inverted or not.
-    let elementColors = `border-color: var(--${variant}-bg);`;
     if (inverted) {
-      elementColors += ` background-color: transparent; color: var(--${variant}-bg); outline-color: var(--${variant}-bg);`;
+      return ` background-color: var(--${variant}-fg); color: var(--${variant}-bg); border-color: var(--${variant}-fg); outline-color: var(--${variant}-fg);`;
     }
     else {
-      elementColors += ` background-color: var(--${variant}-bg); color: var(--${variant}-fg); outline-color: var(--${variant}-bg);`;
+      return ` background-color: var(--${variant}-bg); color: var(--${variant}-fg); border-color: var(--${variant}-bg); outline-color: var(--${variant}-bg);`;
     }
-    return elementColors;
   }
 }
 

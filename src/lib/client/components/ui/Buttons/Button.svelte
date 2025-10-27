@@ -36,7 +36,7 @@
     disabled = false,
     formIsInvalid = false,
     icon = "",
-    disabledIcon = "icomoon-free:spinner2",
+    disabledIcon = "gg:spinner-two-alt",
     iconSide = "left",
     disabledIconShouldSpin = true,
     rotateIcon = "0deg",

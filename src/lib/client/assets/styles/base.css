@@ -9,6 +9,8 @@ body {
 	font-size: 100%;
 	color: var(--text-color);
 	font-weight: normal;
+	/* This enables smooth scrolling to bookmark links. */
+	scroll-behavior: smooth;
 }
 
 h1,
@@ -17,7 +19,7 @@ h3,
 h4,
 h5,
 h6 {
-	margin-bottom: var(--margin-bottom);
+	margin: var(--default-margin) 0;
 	font-family: var(--headings);
 }
 
@@ -46,7 +48,7 @@ h6 {
 }
 
 p {
-	margin-bottom: var(--margin-bottom);
+	margin-bottom: var(--default-margin);
 }
 
 ul, ol {
@@ -111,7 +113,7 @@ button.link-styles:hover :not(:disabled) {
 
 br {
 	line-height: 0; /* Firefox adds a line-height to <br> tags, so this removes that. */
-	margin-bottom: var(--margin-bottom);
+	margin-bottom: var(--default-margin);
 }
 
 hr {
@@ -129,7 +131,7 @@ pre, code {
 
 pre {
 	padding: 10px;
-	margin-bottom: var(--margin-bottom);
+	margin-bottom: var(--default-margin);
 }
 
 

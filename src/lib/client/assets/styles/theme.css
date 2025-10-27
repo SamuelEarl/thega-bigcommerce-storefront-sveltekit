@@ -174,7 +174,7 @@
   /* ----------------- */
   --padding-v-default: var(--size-2);
   --padding-h-default: var(--size-3);
-  --margin-bottom: var(--size-4);
+  --default-margin: var(--size-4);
   
 
   /* ---------- */

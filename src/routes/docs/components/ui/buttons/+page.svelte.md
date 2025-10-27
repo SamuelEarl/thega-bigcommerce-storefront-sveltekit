@@ -14,10 +14,8 @@
     Tooltip 
   } from "$lib/client/components";
 
-  let loggingIn = $state(false);
-  let savingData = $state(false);
+  let saving = $state(false);
 
-  let sendingForm = $state(false);
   let name = $state("");
   let subject = $state("");
   let email = $state("");
@@ -34,9 +32,9 @@
 
   function handleSubmit() {
     event.preventDefault();
-    sendingForm = true;
+    saving = true;
     setTimeout(() => {
-      sendingForm = false;
+      saving = false;
       name = "";
       subject = "";
       email = "";
@@ -62,15 +60,9 @@
   let selectedHPadding = $state(3);
   let selectedBtnWidth = $state("auto");
 
-  function handleLogin() {
-    console.log("CALLED handleLogin");
-    loggingIn = true;
-    setTimeout(() => loggingIn = false, 3000);
-  }
-
-  function handleSaveData() {
-    savingData = true;
-    setTimeout(() => savingData = false, 3000);
+  function handleSave() {
+    saving = true;
+    setTimeout(() => saving = false, 3000);
   }
 
   let showInteractiveButtons = $state(true);
@@ -97,15 +89,15 @@ These buttons provide a lot of styling flexibility out of the box, especially wi
 	sizes={{fs:4, pv:2, ph:3}}
 	inverted={false}
 	width="auto"
-	disabled={loggingIn}
-	icon="ri:login-circle-line"
+	disabled={saving}
+	icon="material-symbols:save-outline-sharp"
 	disabledIconShouldSpin={true}
 	iconSide="right"
-	onclick={handleLogin}
+	onclick={handleSave}
 >
-	Login
+	Save
 	{#snippet disabledContent()}
-		Logging In...
+		Saving
 	{/snippet}
 </Button>
 
@@ -115,12 +107,12 @@ These buttons provide a lot of styling flexibility out of the box, especially wi
 <script>
 	import { Button } from "$lib/client/components";
 
-	let loggingIn = false;
+	let saving = $state(false);
 
-	function handleLogin() {
-		loggingIn = true;
-		setTimeout(() => (loggingIn = false), 3000);
-	}
+	function handleSave() {
+    saving = true;
+    setTimeout(() => saving = false, 3000);
+  }
 </script>
 
 <Button
@@ -129,15 +121,15 @@ These buttons provide a lot of styling flexibility out of the box, especially wi
 	sizes={{fs:4, pv:2, ph:3}}
 	inverted={false}
 	width="auto"
-	disabled={loggingIn}
-	icon="ri:login-circle-line"
+	disabled={saving}
+	icon="material-symbols:save-outline-sharp"
 	disabledIconShouldSpin={true}
 	iconSide="right"
-	onclick={handleLogin}
+	onclick={handleSave}
 >
-	Login
+	Save
 	{#snippet disabledContent()}
-		Logging In...
+		Saving
 	{/snippet}
 </Button>
 ```
@@ -154,11 +146,11 @@ These buttons provide a lot of styling flexibility out of the box, especially wi
         inverted={selectedInverted}
         sizes={{fs:selectedFontSize, pv:selectedVPadding, ph:selectedHPadding}}
         width={selectedBtnWidth}
-        disabled={loggingIn}
-        icon="game-icons:save-arrow"
-        disabledIcon="bi:gear-wide-connected"
+        disabled={saving}
+        icon="material-symbols:save-outline-sharp"
+        disabledIcon="gg:spinner-two-alt"
         disabledIconShouldSpin={true}
-        onclick={handleSaveData}
+        onclick={handleSave}
       >
         Save Data
         {#snippet disabledContent()}
@@ -175,11 +167,11 @@ These buttons provide a lot of styling flexibility out of the box, especially wi
         inverted={selectedInverted}
         sizes={{fs:selectedFontSize, pv:selectedVPadding, ph:selectedHPadding}}
         width={selectedBtnWidth}
-        disabled={loggingIn}
-        icon="game-icons:save-arrow"
-        disabledIcon="bi:gear-wide-connected"
+        disabled={saving}
+        icon="material-symbols:save-outline-sharp"
+        disabledIcon="gg:spinner-two-alt"
         disabledIconShouldSpin={true}
-        onclick={handleSaveData}
+        onclick={handleSave}
       >
         Save Data
         {#snippet disabledContent()}
@@ -251,31 +243,39 @@ These buttons provide a lot of styling flexibility out of the box, especially wi
 
 ---
 
-## How to use as the submit button in a `<form>`
+## How to use `<Button>` as the submit button in a `<form>`
 
 <form method="POST" onsubmit={handleSubmit}>
   <div class="form-field">
-    <Input type="text" bind:value={name} label="Your Name" />
+    <Label text="Your Name">
+      <Input type="text" bind:value={name} />
+    </Label>
   </div>
   <div class="form-field">
-    <Input type="text" bind:value={subject} label="Subject" />
+    <Label text="Subject">
+      <Input type="text" bind:value={subject} />
+    </Label>
   </div>
   <div class="form-field">
-    <Input type="text" bind:value={email} label="Your Email Address" />
+    <Label text="Your Email Address">
+      <Input type="text" bind:value={email} />
+    </Label>
   </div>
   <div class="form-field">
-    <Textarea bind:value={message} label="Message" rows="5" />
+    <Label text="Message">
+      <Textarea bind:value={message} rows="5" />
+    </Label>
   </div>
   <div class="form-field">
     <Button
       type="submit" 
-      disabled={sendingForm}
+      disabled={saving}
       formIsInvalid={fieldsAreNotFilled}
-      icon="fa:send"
+      icon="material-symbols:save-outline-sharp"
     >
-      Send
+      Save Form Data
       {#snippet disabledContent()}
-        Sending...
+        Saving Form Data
       {/snippet}
     </Button>
   </div>
@@ -285,7 +285,7 @@ These buttons provide a lot of styling flexibility out of the box, especially wi
 
 ```svelte
 <script>
-	let sendingForm = $state(false);
+	let saving = $state(false);
 	let name = $state("");
 	let subject = $state("");
 	let email = $state("");
@@ -303,14 +303,14 @@ These buttons provide a lot of styling flexibility out of the box, especially wi
 	async function handleSubmit(event) {
 		try {
 			event.preventDefault();
-			sendingForm = true;
+			saving = true;
 
 			// Custom event listener goes here.
 			// See https://svelte.dev/docs/kit/form-actions#Progressive-enhancement-Custom-event-listener
 		} catch (err) {
 			console.error(err);
 		} finally {
-			sendingForm = false;
+			saving = false;
 			name = "";
 			subject = "";
 			email = "";
@@ -320,26 +320,39 @@ These buttons provide a lot of styling flexibility out of the box, especially wi
 </script>
 
 <form method="POST" onsubmit={handleSubmit}>
-	<div class="form-field">
-		<Input type="text" bind:value={name} label="Your Name" />
-	</div>
-	<div class="form-field">
-		<Input type="text" bind:value={subject} label="Subject" />
-	</div>
-	<div class="form-field">
-		<Input type="text" bind:value={email} label="Your Email Address" />
-	</div>
-	<div class="form-field">
-		<Textarea bind:value={message} label="Message" rows="5" />
-	</div>
-	<div class="form-field">
-		<Button type="submit" disabled={sendingForm} formIsInvalid={fieldsAreNotFilled} icon="fa:send">
-			Send
-			{#snippet disabledContent()}
-				Sending...
-			{/snippet}
-		</Button>
-	</div>
+  <div class="form-field">
+    <Label text="Your Name">
+      <Input type="text" bind:value={name} />
+    </Label>
+  </div>
+  <div class="form-field">
+    <Label text="Subject">
+      <Input type="text" bind:value={subject} />
+    </Label>
+  </div>
+  <div class="form-field">
+    <Label text="Your Email Address">
+      <Input type="text" bind:value={email} />
+    </Label>
+  </div>
+  <div class="form-field">
+    <Label text="Message">
+      <Textarea bind:value={message} rows="5" />
+    </Label>
+  </div>
+  <div class="form-field">
+    <Button
+      type="submit" 
+      disabled={saving}
+      formIsInvalid={fieldsAreNotFilled}
+      icon="material-symbols:save-outline-sharp"
+    >
+      Save Form Data
+      {#snippet disabledContent()}
+        Saving Form Data
+      {/snippet}
+    </Button>
+  </div>
 </form>
 ```
 
@@ -350,88 +363,33 @@ These buttons provide a lot of styling flexibility out of the box, especially wi
 You can create buttons that have only icons (i.e. no text). Do not pass any snippets in between the opening `<Button>` and closing `</Button>` tags and provide the `icon` and/or `disabledIcon` props.
 
 <Button
-  icon="ion:save-sharp"
-  inverted={true}
-  sizes={{fs:8, pv:2, ph:2}}
+  icon="material-symbols:save-outline-sharp"
+  sizes={{fs:10, pv:2, ph:2}}
   title="Save File"
-  disabled={savingData}
-  onclick={handleSaveData}  
+  disabled={saving}
+  onclick={handleSave}  
 />
 
 <br>
 
 ```svelte
 <script>
-	let savingData = false;
+	let saving = false;
 
-	function handleSaveData() {
-		savingData = true;
-		setTimeout(() => (savingData = false), 3000);
+	function handleSave() {
+		saving = true;
+		setTimeout(() => (saving = false), 3000);
 	}
 </script>
 
 <Button
-	icon="ion:save-sharp"
-	inverted={true}
-	sizes={{ fs: 8, pv: 2, ph: 2 }}
+	icon="material-symbols:save-outline-sharp"
+	sizes={{ fs:10, pv:2, ph:2 }}
 	title="Save File"
-	disabled={savingData}
-	onclick={handleSaveData}
+	disabled={saving}
+	onclick={handleSave}
 />
 ```
-
-<br>
-
-Another option for creating icon buttons is to pass an Iconify icon component in between the opening and closing `<Button>` tags. This option gives you more freedom to style the icon, like using Iconify attributes on the icon.
-
-<Button
-	disabled={savingData}
-	inverted={true}
-	sizes={{pv:2, ph:2}}
-	title="Save File"
-	onclick={handleSaveData}
->
-	<Icon icon="ion:save-sharp" width="40" />
-	{#snippet disabledContent()}
-		<Icon icon="bi:gear-wide-connected" class="fp-spin" width="40" />
-	{/snippet}
-</Button>
-
-<br>
-
-```svelte
-<script>
-  import { Icon } from "$lib/client/components";
-
-	let savingData = false;
-
-	function handleSaveData() {
-		savingData = true;
-		setTimeout(() => (savingData = false), 3000);
-	}
-</script>
-
-<Button
-	disabled={savingData}
-	inverted={true}
-	sizes={{pv:2, ph:2}}
-	title="Save File"
-	onclick={handleSaveData}
->
-	<Icon icon="ion:save-sharp" width="40" />
-	{#snippet disabledContent()}
-		<Icon icon="bi:gear-wide-connected" class="fp-spin" width="40" />
-	{/snippet}
-</Button>
-```
-
-<br>
-
-**NOTES:**
-
-- If the `<Button>` component's `icon` prop does NOT have a default value of `""`, then you will need to set `icon=""` to remove any other icons that would be displayed as part of this `<Button>` component's props.
-- You can pass another icon to the `disabledContent` snippet if you want to display a disabled icon state.
-- The nice thing about this option is that you can set any Iconify props on the `<Icon>` component (e.g. the `width` prop in the example above.)
 
 ---
 
@@ -442,27 +400,27 @@ Another option for creating icon buttons is to pass an Iconify icon component in
   - `fg` = foreground color (i.e. text color)
   - `br` = border color
   - `ol` = outline color
-- If you pass the `colors` prop, then it will override the `variant` and `inverted` props.
 - You need to specifiy each property in the `colors` prop because there are no default color values for the `colors` prop.
+- If you pass the `colors` prop, then it will override the `variant` and `inverted` props.
 
 <br>
 
 <Button
 	colors={{
 		bg: "transparent",
-		fg: "var(--red)",
-		br: "var(--red)",
-		ol: "var(--red)",
+		fg: "var(--dark-red)",
+		br: "var(--dark-red)",
+		ol: "var(--dark-red)",
 	}}
-	disabled={loggingIn}
-	icon="ri:login-circle-line"
+	disabled={saving}
+	icon="material-symbols:save-outline-sharp"
 	disabledIconShouldSpin={true}
 	iconSide="right"
-	onclick={handleLogin}
+	onclick={handleSave}
 >
-	Login
+	Save
 	{#snippet disabledContent()}
-		Logging In...
+		Saving
 	{/snippet}
 </Button>
 
@@ -472,30 +430,30 @@ Another option for creating icon buttons is to pass an Iconify icon component in
 <script>
 	import { Button } from "$lib/client/components";
 
-	let loggingIn = false;
+	let saving = $state(false);
 
-	function handleLogin() {
-		loggingIn = true;
-		setTimeout(() => (loggingIn = false), 3000);
-	}
+	function handleSave() {
+    saving = true;
+    setTimeout(() => saving = false, 3000);
+  }
 </script>
 
 <Button
 	colors={{
 		bg: "transparent",
-		fg: "var(--red)",
-		br: "var(--red)",
-		ol: "var(--red)",
+		fg: "var(--dark-red)",
+		br: "var(--dark-red)",
+		ol: "var(--dark-red)",
 	}}
-	disabled={loggingIn}
-	icon="ri:login-circle-line"
+	disabled={saving}
+	icon="material-symbols:save-outline-sharp"
 	disabledIconShouldSpin={true}
 	iconSide="right"
-	onclick={handleLogin}
+	onclick={handleSave}
 >
-	Login
+	Save
 	{#snippet disabledContent()}
-		Logging In...
+		Saving
 	{/snippet}
 </Button>
 ```
@@ -535,7 +493,7 @@ Another option for creating icon buttons is to pass an Iconify icon component in
       "<code>boolean</code>",
       "<code>true</code>, <code>false</code>",
       "<code>false</code>",
-      "<code>false</code> will create a regular button. <code>true</code> will set the button background to transparent and the text and border colors will be taken from the <code>variant</code> prop.",
+      "<code>false</code> will create a regular button. <code>true</code> will switch the background and foreground colors.",
     ],
     [
       "<code>colors</code>",
@@ -583,7 +541,7 @@ Another option for creating icon buttons is to pass an Iconify icon component in
       "<code>disabledIcon</code>",
       "<code>string</code>",
       "See <code>icon</code>",
-      "<code>icomoon-free:spinner2</code> (no icon)",
+      "<code>gg:spinner-two-alt</code>",
       "See <code>icon</code>",
     ],
     [

@@ -27,9 +27,10 @@ import { locate } from "@iconify/json";
       "close",
       "chevron-left",
       "chevron-right",
+      "save-outline-sharp",
     ],
-    "icomoon-free": [
-      "spinner2",
+    "gg": [
+      "spinner-two-alt",
     ],
   };
 

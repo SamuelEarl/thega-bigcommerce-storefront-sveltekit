@@ -18,57 +18,57 @@
 		menu: [
 			{
 				label: "MEN",
-				url: "/collections/men",
+				url: "/categories/men",
 				submenu: [
 					{
 						label: "Shoes",
-						url: "/collections/men/shoes",
+						url: "/categories/men/shoes",
 					},
 					{
 						label: "Shirts",
-						url: "/collections/men/shirts",
+						url: "/categories/men/shirts",
 					},
 				],
 			},
 			{
 				label: "WOMEN",
-				url: "/collections/women",
+				url: "/categories/women",
 				submenu: [
 					{
 						label: "Shoes",
-						url: "/collections/women/shoes",
+						url: "/categories/women/shoes",
 					},
 					{
 						label: "Shirts",
-						url: "/collections/women/shirts",
+						url: "/categories/women/shirts",
 					},
 				],
 			},
 			{
 				label: "BOYS",
-				url: "/collections/boys",
+				url: "/categories/boys",
 				submenu: [
 					{
 						label: "Shoes",
-						url: "/collections/boys/shoes",
+						url: "/categories/boys/shoes",
 					},
 					{
 						label: "Shirts",
-						url: "/collections/boys/shirts",
+						url: "/categories/boys/shirts",
 					},
 				],
 			},
 			{
 				label: "GIRLS",
-				url: "/collections/girls",
+				url: "/categories/girls",
 				submenu: [
 					{
 						label: "Shoes",
-						url: "/collections/girls/shoes",
+						url: "/categories/girls/shoes",
 					},
 					{
 						label: "Shirts",
-						url: "/collections/girls/shirts",
+						url: "/categories/girls/shirts",
 					},
 				],
 			},
