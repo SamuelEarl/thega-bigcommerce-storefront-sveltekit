@@ -17,7 +17,7 @@ This component uses CSS icons from Iconify. For details see the following pages:
 
 To use Iconify icons in HTML, pass the `icon-set:icon-name` string (from Iconify) to this `<Icon>` component.
 
-<Icon icon="carbon:home" style="font-size: 100px;" />
+<Icon icon="material-symbols:save-outline-sharp" style="font-size: 100px;" />
 
 <br>
 
@@ -26,7 +26,7 @@ To use Iconify icons in HTML, pass the `icon-set:icon-name` string (from Iconify
   import { Icon } from "$lib/client/components";
 </script>
 
-<Icon icon="carbon:home" style="font-size: 100px;" />
+<Icon icon="material-symbols:save-outline-sharp" style="font-size: 100px;" />
 ```
 
 ### IMPORTANT
@@ -43,16 +43,24 @@ This is how you update the `icons.css` file:
 
 ## Icons without this component
 
-If you don't want to use this component for some reason, then you can also use `<span>` elements with two class names:
+If you don't want to use this component or you need to use the `<span>` version to produce your icons, then you can do that by passing two classes to a `<span>` element:
 
 1. The class name for the icon set.
 2. The class name for the icon.
 
-<span class="icon--carbon icon--carbon--home" style="font-size: 100px;"></span>
+**Syntax:**
 
 ```
-<span class="icon--carbon icon--carbon--home" style="font-size: 100px;"></span>
+<span class="icon--<icon-set> icon--<icon-set>--<icon-name>" style="font-size: 100px;"></span>
 ```
+
+**Example:**
+
+```
+<span class="icon--material-symbols icon--material-symbols--save-outline-sharp" style="font-size: 100px;"></span>
+```
+
+<span class="icon--material-symbols icon--material-symbols--save-outline-sharp" style="font-size: 100px;"></span>
 
 <br>
 
@@ -61,3 +69,4 @@ If you don't want to use this component for some reason, then you can also use `
 | Prop name | Type | Possible values | Default value | Description |
 | --------- | ---- | --------------- | ------------- | ----------- |
 | `icon` | `string` | Any `icon-set:icon-name` string from Iconfiy | None | This prop will specify the icon that will be displayed. |
+| `style` | `string` | Any CSS style string | `""` | This prop allows you to style the icons. You will probably use this mostly to pass `font-size` and maybe `color` styles to this component. |

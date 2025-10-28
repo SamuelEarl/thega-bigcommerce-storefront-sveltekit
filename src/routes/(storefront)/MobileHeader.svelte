@@ -2,13 +2,16 @@
 	import { afterNavigate } from "$app/navigation";
 	import { Button, Icon, Link } from "$lib/client/components";
 	import LogoWhite from "$lib/client/assets/images/logo-and-name-horizontal-white-fbfbfb.svg";
+	import type { ISubmenu, IMenuItem, IIconBtn } from "./Header.svelte";
 
 	interface Props {
-		mainNav: any;
+		mainNav: IMenuItem[];
+		iconBtns: IIconBtn[];
   }
 
   let {
-    mainNav
+    mainNav,
+		iconBtns,
   }: Props = $props();
 
 	let mobileMainNavContainerRef: HTMLDivElement;
@@ -21,34 +24,22 @@
 		if (mobileSubnavContainerRef) mobileSubnavContainerRef.style.right = "110vw";
 	});
 
+	// The default value is 
 	let activeNav = $state("MAIN");
 
-	const iconBtns = [
-		{
-			icon: "material-symbols:search",
-			url: "",
-			size: "font-size: 24px",
-		},
-		{
-			icon: "material-symbols:shopping-bag-outline-sharp",
-			url: "",
-			size: "font-size: 22px",
-		},
-		{
-			icon: "material-symbols:person-outline",
-			url: "",
-			size: "font-size: 24px",
-		},
-	];
-
 	function getActiveSubmenu() {
-		const menu = mainNav.menu.find(menu => menu.label === activeNav);
+		const menu = mainNav.find(menuItem => menuItem.label === activeNav);
 		return menu?.submenu;
 	}
 
 	function getMainMenuItemURL() {
-		const menu = mainNav.menu.find(menu => menu.label === activeNav);
-		return menu?.url;
+		const menu = mainNav.find(menuItem => menuItem.label === activeNav);
+		if (menu) {
+			return menu.url;
+		}
+		else {
+			return "";
+		}
 	}
 </script>
 
@@ -96,18 +87,18 @@
 			</div>
 			<nav>
 				<ul>
-					{#each mainNav.menu as item}				
+					{#each mainNav as menuItem}				
 						<li>
 							<button
 								style="width: 100%; display: flex; justify-content: space-between;"
 								onclick={() => {
 									// Set the `activeNav` to the subnav that was clicked.
-									activeNav = item.label;
+									activeNav = menuItem.label;
 									// Display the subnav container.
 									mobileSubnavContainerRef.style.right = "0"
 								}}
 							>
-									{item.label} <Icon icon="material-symbols:chevron-right" style="font-size: var(--size-8); color: var(--old-gold);" />
+									{menuItem.label} <Icon icon="material-symbols:chevron-right" style="font-size: var(--size-8); color: var(--old-gold);" />
 							</button>
 						</li>
 					{/each}
@@ -158,10 +149,10 @@
 					</Link>
 				</h4>
 				<ul>
-					{#each getActiveSubmenu() as item}
+					{#each getActiveSubmenu() as link}
 						<li>
-							<Link href={item.url} variant="secondary" underline={false}>
-								{item.label}
+							<Link href={link.url} variant="secondary" underline={false}>
+								{link.label}
 							</Link>
 						</li>
 					{/each}

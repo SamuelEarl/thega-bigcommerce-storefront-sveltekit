@@ -5,10 +5,12 @@
 <script lang="ts">
   interface Props {
     icon: string;
+    style: string;
   }
 
   let {
     icon,
+    style = "",
     ...restProps
   }: Props = $props();
 
@@ -16,4 +18,8 @@
   const [iconSet, iconName] = icon.split(":");
 </script>
 
-<span class={`icon--${iconSet} icon--${iconSet}--${iconName}`} {...restProps}></span>
+<span
+  class={`icon--${iconSet} icon--${iconSet}--${iconName}`}
+  {style}
+  {...restProps}
+></span>

@@ -1,46 +1,34 @@
 <script lang="ts">
-	import { afterNavigate } from "$app/navigation";
-	import { Button, Icon, Link } from "$lib/client/components";
+	// import { afterNavigate } from "$app/navigation";
+	import { Icon, Link } from "$lib/client/components";
 	import LogoWhite from "$lib/client/assets/images/logo-and-name-horizontal-white-fbfbfb.svg";
+	import type { ISubmenu, IMenuItem, IIconBtn } from "./Header.svelte";
 
 	interface Props {
-		mainNav: any;
+		mainNav: IMenuItem[];
+		iconBtns: IIconBtn[];
   }
 
   let {
-    mainNav
+    mainNav,
+		iconBtns,
   }: Props = $props();
 
-	// TODO: I can delete this desktopMegaMenuOuterContainerRef variable and all references to it if I don't want to use a transition on the mega menu, which I don't think I want to.
-	let desktopMegaMenuOuterContainerRef: HTMLElement;
-	let desktopMegaMenuInnerContainerRef: HTMLElement;
+	let megaMenuInnerContainerRef: HTMLElement;
 
-	let userIsFocusedOnDesktopMainNavRef = $state(false);
-	let userIsFocusedOnDesktopMegaMenuOuterContainerRef = $state(false);
+	let isUserFocusedOnMainNavElement = $state(false);
+	let isUserFocusedOnMegaMenuOuterContainerElement = $state(false);
 
-	let activeMegaMenu = $state([]);
+	let activeSubmenu: ISubmenu[] = $state([]);
 
-	const iconBtns = [
-		{
-			icon: "material-symbols:search",
-			url: "",
-			size: "font-size: 24px",
-		},
-		{
-			icon: "material-symbols:shopping-bag-outline-sharp",
-			url: "",
-			size: "font-size: 22px",
-		},
-		{
-			icon: "material-symbols:person-outline",
-			url: "",
-			size: "font-size: 24px",
-		},
-	];
-
-	function setActiveMegaMenu(menuLabel: string) {
-		const menu = mainNav.menu.find(menu => menu.label === menuLabel);
-		activeMegaMenu = menu?.submenu;
+	function setActiveSubmenu(menuLabel: string) {
+		const menu = mainNav.find(menuItem => menuItem.label === menuLabel);
+		if (menu) {
+			activeSubmenu = menu.submenu;
+		}
+		else {
+			activeSubmenu = [];
+		}
 	}
 
 	/**
@@ -49,11 +37,11 @@
 	 * @param event
 	 */
 	function checkIfUserIsFocusedOnMenu() {
-		if (!userIsFocusedOnDesktopMainNavRef && !userIsFocusedOnDesktopMegaMenuOuterContainerRef) {
-			desktopMegaMenuInnerContainerRef.style.top = "-100vh";
+		if (!isUserFocusedOnMainNavElement && !isUserFocusedOnMegaMenuOuterContainerElement) {
+			megaMenuInnerContainerRef.style.display = "none";
 		}
 		else {
-			desktopMegaMenuInnerContainerRef.style.top = "-1px";
+			megaMenuInnerContainerRef.style.display = "block";
 		}
 	}
 </script>
@@ -67,30 +55,30 @@
 		<nav
 			class="main-nav"
 			onmouseout={() => {
-				userIsFocusedOnDesktopMainNavRef = false;
+				isUserFocusedOnMainNavElement = false;
 				checkIfUserIsFocusedOnMenu();
 			}}
 			onblur={() => {
-				userIsFocusedOnDesktopMainNavRef = false;
+				isUserFocusedOnMainNavElement = false;
 				checkIfUserIsFocusedOnMenu();
 			}}
 		>
 			<ul>
-				{#each mainNav.menu as item}	
+				{#each mainNav as menuItem}	
 					<li
 						onmouseover={() => {
-							setActiveMegaMenu(item.label);
-							userIsFocusedOnDesktopMainNavRef = true;
+							setActiveSubmenu(menuItem.label);
+							isUserFocusedOnMainNavElement = true;
 							checkIfUserIsFocusedOnMenu();
 						}}
 						onfocus={() => {
-							setActiveMegaMenu(item.label);
-							userIsFocusedOnDesktopMainNavRef = true;
+							setActiveSubmenu(menuItem.label);
+							isUserFocusedOnMainNavElement = true;
 							checkIfUserIsFocusedOnMenu();
 						}}
 					>
-						<a href={item.url}>
-							{item.label}
+						<a href={menuItem.url}>
+							{menuItem.label}
 						</a>
 					</li>
 				{/each}
@@ -107,40 +95,33 @@
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<div
 		class="mega-menu-outer-container"
-		bind:this={desktopMegaMenuOuterContainerRef}
 		onmouseover={() => {
-			userIsFocusedOnDesktopMegaMenuOuterContainerRef = true;
+			isUserFocusedOnMegaMenuOuterContainerElement = true;
 			checkIfUserIsFocusedOnMenu();
 		}}
 		onfocus={() => {
-			userIsFocusedOnDesktopMegaMenuOuterContainerRef = true;
+			isUserFocusedOnMegaMenuOuterContainerElement = true;
 			checkIfUserIsFocusedOnMenu();
 		}}
 		onmouseout={() => {
-			userIsFocusedOnDesktopMegaMenuOuterContainerRef = false;
+			isUserFocusedOnMegaMenuOuterContainerElement = false;
 			checkIfUserIsFocusedOnMenu();
 		}}
 		onblur={() => {
-			userIsFocusedOnDesktopMegaMenuOuterContainerRef = false;
+			isUserFocusedOnMegaMenuOuterContainerElement = false;
 			checkIfUserIsFocusedOnMenu();
 		}}
 	>
-		<!-- ontransitionstart={() => {
-			desktopMegaMenuOuterContainerRef.style.pointerEvents = "none";
-		}}
-		ontransitionend={() => {
-			desktopMegaMenuOuterContainerRef.style.pointerEvents = "auto";
-		}} -->
 		<div 
-			bind:this={desktopMegaMenuInnerContainerRef}
+			bind:this={megaMenuInnerContainerRef}
 			class="mega-menu-inner-container"
 		>
 			<nav>
 				<ul>
-					{#each activeMegaMenu as item}
+					{#each activeSubmenu as link}
 						<li>
-							<Link href={item.url} variant="secondary" underline={false}>
-								{item.label}
+							<Link href={link.url} variant="secondary" underline={false}>
+								{link.label}
 							</Link>
 						</li>
 					{/each}
@@ -223,14 +204,13 @@
 				position: relative;
 
 				& .mega-menu-inner-container {
+					/* To display the mega menu so you can edit it, comment out this `display: none;` property and the 
+					`megaMenuInnerContainerRef.style.display = "none";` line in the JavaScript code and hover over one of the main menu items to populate the mega menu with data. */
+					display: none;
 					position: absolute;
-					/* To edit the mega menu styles, comment out this `top: -100vh;` property and the 
-					`desktopMegaMenuInnerContainerRef.style.top = "-100vh";` line in the JavaScript code. */
-					top: -100vh;
-					width: 100vw;
+					width: 100%;
 					background-color: var(--black);
 					color: var(--white);
-					/* transition: top 0.25s ease; */
 
 					& nav {
 						max-width: var(--sm-max);
