@@ -26,6 +26,7 @@
     {
       label: "MEN",
       url: "/men",
+      // Each object within the submenu is a link to a list page.
       submenu: [
         {
           label: "Shoes",

@@ -24,21 +24,25 @@
 		if (mobileSubnavContainerRef) mobileSubnavContainerRef.style.right = "110vw";
 	});
 
-	// The default value is 
-	let activeNav = $state("MAIN");
+	// The default value of "MAIN" refers to the entire main nav rather than a specific menu item in the main nav.
+	let activeMainNavItem = $state("MAIN");
 
-	function getActiveSubmenu() {
-		const menu = mainNav.find(menuItem => menuItem.label === activeNav);
-		return menu?.submenu;
-	}
-
-	function getMainMenuItemURL() {
-		const menu = mainNav.find(menuItem => menuItem.label === activeNav);
+	/**
+	 * This function will return the URL and submenu of the active main nav item.
+	 */
+	function getActiveMainNavItem() {
+		const menu = mainNav.find(menuItem => menuItem.label === activeMainNavItem);
 		if (menu) {
-			return menu.url;
+			return {
+				url: menu.url,
+				submenu: menu.submenu,
+			};
 		}
 		else {
-			return "";
+			return {
+				url: "",
+				submenu: [],
+			}
 		}
 	}
 </script>
@@ -49,7 +53,7 @@
 			<Button
 				sizes={{ pv:0, ph:0 }}
 				onclick={() => {
-					activeNav = "MAIN";
+					activeMainNavItem = "MAIN";
 					// Display the main nav container.
 					mobileMainNavContainerRef.style.right = "0";
 				}}
@@ -92,8 +96,8 @@
 							<button
 								style="width: 100%; display: flex; justify-content: space-between;"
 								onclick={() => {
-									// Set the `activeNav` to the subnav that was clicked.
-									activeNav = menuItem.label;
+									// Set the `activeMainNavItem` to the subnav that was clicked.
+									activeMainNavItem = menuItem.label;
 									// Display the subnav container.
 									mobileSubnavContainerRef.style.right = "0"
 								}}
@@ -109,11 +113,11 @@
 		<div class="subnav-container" bind:this={mobileSubnavContainerRef}>
 			<div class="menu-top-btns">
 				<div class="back-to-main-menu-btn-container">
-					{#if activeNav !== "MAIN"}
+					{#if activeMainNavItem !== "MAIN"}
 						<Button
 							sizes={{ pv:0, ph:0 }}
 							onclick={() => {
-								activeNav = "MAIN";
+								activeMainNavItem = "MAIN";
 								// Hide the subnav container.
 								mobileSubnavContainerRef.style.right = "110vw";
 								// Display the main nav container.
@@ -144,12 +148,12 @@
 			</div>
 			<nav>
 				<h4>
-					<Link href={getMainMenuItemURL()} variant="tertiary" underline={false}>
-						{activeNav}
+					<Link href={getActiveMainNavItem().url} variant="tertiary" underline={false}>
+						{activeMainNavItem}
 					</Link>
 				</h4>
 				<ul>
-					{#each getActiveSubmenu() as link}
+					{#each getActiveMainNavItem().submenu as link}
 						<li>
 							<Link href={link.url} variant="secondary" underline={false}>
 								{link.label}
