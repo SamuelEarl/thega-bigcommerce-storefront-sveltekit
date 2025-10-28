@@ -6,18 +6,25 @@ export default defineConfig({
 	server: {
 		port: 3000,
 	},
-	// build: {
-	// 	// This throws the following error: 
-	// 	// Entry module "src/routes/docs/+layout.svelte" cannot be external.
-	// 	rollupOptions: {
-	// 		external: (id) => {
-  //       // Exclude any module whose path includes "routes/docs".
-  //       return id.includes("routes/docs");
-  //     }
-	// 	}
-	// 	// // Set `minify` to `false` to troubleshoot `error during build: undefined`.
-  //   // minify: false,
-  // },
+	build: {
+		rollupOptions: {
+			external: [
+				// Exclude files ending with .test.ts or .spec.ts
+				/\.test\.(ts|js)$/,
+				/\.spec\.(ts|js)$/,
+				// Exclude files in a __tests__ directory
+				/__tests__\//,
+			],
+			// external: (id) => {
+			// 	// This throws the following error: 
+			// 	// Entry module "src/routes/docs/+layout.svelte" cannot be external.
+      //   // Exclude any module whose path includes "routes/docs".
+      //   return id.includes("routes/docs");
+      // }
+		}
+		// // Set `minify` to `false` to troubleshoot `error during build: undefined`.
+    // minify: false,
+  },
 	plugins: [
 		// vite-plugin-checker will add type checking and linting support for Vite during dev and build.
 		// This can help troubleshoot errors. See https://vite-plugin-checker.netlify.app/.
