@@ -11,10 +11,9 @@
     mainNav
   }: Props = $props();
 
-	let desktopMainNavRef: HTMLElement;
+	// TODO: I can delete this desktopMegaMenuOuterContainerRef variable and all references to it if I don't want to use a transition on the mega menu, which I don't think I want to.
 	let desktopMegaMenuOuterContainerRef: HTMLElement;
 	let desktopMegaMenuInnerContainerRef: HTMLElement;
-	let desktopMegaMenuNavRef: HTMLElement;
 
 	let userIsFocusedOnDesktopMainNavRef = $state(false);
 	let userIsFocusedOnDesktopMegaMenuOuterContainerRef = $state(false);
@@ -66,7 +65,7 @@
 		</div>
 	
 		<nav
-			bind:this={desktopMainNavRef}
+			class="main-nav"
 			onmouseout={() => {
 				userIsFocusedOnDesktopMainNavRef = false;
 				checkIfUserIsFocusedOnMenu();
@@ -136,7 +135,7 @@
 			bind:this={desktopMegaMenuInnerContainerRef}
 			class="mega-menu-inner-container"
 		>
-			<nav bind:this={desktopMegaMenuNavRef}>
+			<nav>
 				<ul>
 					{#each activeMegaMenu as item}
 						<li>
