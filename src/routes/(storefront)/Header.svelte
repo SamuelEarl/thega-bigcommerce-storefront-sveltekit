@@ -1,430 +1,70 @@
 <script lang="ts">
-	import { afterNavigate } from "$app/navigation";
-	import { Button, Icon, Link } from "$lib/client/components";
-	import LogoWhite from "$lib/client/assets/images/logo-and-name-horizontal-white-fbfbfb.svg";
+  import MobileHeader from "./MobileHeader.svelte";
+  import DesktopHeader from "./DesktopHeader.svelte";
 
-	let mainNavContainer: HTMLDivElement;
-	let subnavContainer: HTMLDivElement;
-
-	// On mobile close the nav containers after a user navigates so they
-	// are not still displaying after a user has clicked a link.
-	afterNavigate(() => {
-		if (mainNavContainer) mainNavContainer.style.right = "110vw";
-		if (subnavContainer) subnavContainer.style.right = "110vw";
-	});
-
-	const mainNav = {
+  // TODO: Add an interface for mainNav and import it into the MobileHeader and DesktopHeader components.
+  const mainNav = {
 		name: "MAIN",
 		menu: [
 			{
 				label: "MEN",
-				url: "/categories/men",
+				url: "/men",
 				submenu: [
 					{
 						label: "Shoes",
-						url: "/categories/men/shoes",
+						url: "/men/shoes",
 					},
 					{
 						label: "Shirts",
-						url: "/categories/men/shirts",
+						url: "/men/shirts",
 					},
 				],
 			},
 			{
 				label: "WOMEN",
-				url: "/categories/women",
+				url: "/women",
 				submenu: [
 					{
 						label: "Shoes",
-						url: "/categories/women/shoes",
+						url: "/women/shoes",
 					},
 					{
 						label: "Shirts",
-						url: "/categories/women/shirts",
+						url: "/women/shirts",
 					},
 				],
 			},
 			{
 				label: "BOYS",
-				url: "/categories/boys",
+				url: "/boys",
 				submenu: [
 					{
 						label: "Shoes",
-						url: "/categories/boys/shoes",
+						url: "/boys/shoes",
 					},
 					{
 						label: "Shirts",
-						url: "/categories/boys/shirts",
+						url: "/boys/shirts",
 					},
 				],
 			},
 			{
 				label: "GIRLS",
-				url: "/categories/girls",
+				url: "/girls",
 				submenu: [
 					{
 						label: "Shoes",
-						url: "/categories/girls/shoes",
+						url: "/girls/shoes",
 					},
 					{
 						label: "Shirts",
-						url: "/categories/girls/shirts",
+						url: "/girls/shirts",
 					},
 				],
 			},
 		],
 	};
-
-	let activeNav = "MAIN";
-
-	const iconBtns = [
-		{
-			icon: "material-symbols:search",
-			url: "",
-			size: "font-size: 24px",
-		},
-		{
-			icon: "material-symbols:shopping-bag-outline-sharp",
-			url: "",
-			size: "font-size: 22px",
-		},
-		{
-			icon: "material-symbols:person-outline",
-			url: "",
-			size: "font-size: 24px",
-		},
-	];
-
-	function getActiveSubmenu() {
-		const displayNav = mainNav.menu.find(menu => menu.label === activeNav);
-		return displayNav?.submenu;
-	}
-
-	function getMainMenuItemURL() {
-		const displayNav = mainNav.menu.find(menu => menu.label === activeNav);
-		return displayNav?.url;
-	}
 </script>
 
-<header>
-	<div class="header-content">
-		<div class="open-menu-btn-container">
-			<Button
-				sizes={{ pv:0, ph:0 }}
-				onclick={() => {
-					activeNav = "MAIN";
-					// Display the main nav container.
-					mainNavContainer.style.right = "0";
-				}}
-			>
-				<Icon icon="material-symbols:menu" style="font-size: var(--size-8)" />
-			</Button>
-		</div>
-		<div class="logo-wrapper">
-			<a href="/"><img src={LogoWhite} class="logo" alt="logo" /></a>
-		</div>
-		<div>
-			<Icon icon="material-symbols:menu" style="font-size: var(--size-8); color: transparent;" />
-		</div>
-		
-		<div class="main-nav-container" bind:this={mainNavContainer}>
-			<div class="menu-top-btns">
-				<!-- This empty <div> is used as a spacer element so the close button will align properly to the right. -->
-				<div></div>
-				<div class="close-menu-btn-container">
-					<Button
-						sizes={{ pv:0, ph:0 }}
-						onclick={() => {
-							// Hide the main nav container.
-							mainNavContainer.style.right = "110vw";
-						}}
-					>
-						<Icon icon="material-symbols:close" style="font-size: var(--size-8)" />
-					</Button>
-				</div>
-			</div>
-			<div class="icons-wrapper">
-				{#each iconBtns as icon}
-					<div><Icon icon={icon.icon} style={icon.size} /></div>
-				{/each}
-			</div>
-			<nav>
-				<ul>
-					{#each mainNav.menu as item}				
-						<li>
-							<button
-								style="width: 100%; display: flex; justify-content: space-between;"
-								onclick={() => {
-									// Set the `activeNav` to the subnav that was clicked.
-									activeNav = item.label;
-									// Display the subnav container.
-									subnavContainer.style.right = "0"
-								}}
-							>
-									{item.label} <Icon icon="material-symbols:chevron-right" style="font-size: var(--size-8); color: var(--old-gold);" />
-							</button>
-						</li>
-					{/each}
-				</ul>
-			</nav>
-		</div>
-
-		<div class="subnav-container" bind:this={subnavContainer}>
-			<div class="menu-top-btns">
-					<div class="back-to-main-menu-btn-container">
-						{#if activeNav !== "MAIN"}
-							<Button
-								sizes={{ pv:0, ph:0 }}
-								onclick={() => {
-									activeNav = "MAIN";
-									// Hide the subnav container.
-									subnavContainer.style.right = "110vw";
-									// Display the main nav container.
-									mainNavContainer.style.right = "0";
-								}}
-							>
-								<Icon icon="material-symbols:chevron-left" style="font-size: var(--size-8); color: var(--old-gold);" /> MAIN
-							</Button>
-						{/if}
-					</div>
-				<div class="close-menu-btn-container">
-					<Button
-						sizes={{ pv:0, ph:0 }}
-						onclick={() => {
-							// Hide both nav containers.
-							mainNavContainer.style.right = "110vw";
-							subnavContainer.style.right = "110vw";
-						}}
-					>
-						<Icon icon="material-symbols:close" style="font-size: var(--size-8)" />
-					</Button>
-				</div>
-			</div>
-			<div class="icons-wrapper">
-				{#each iconBtns as icon}
-					<div><Icon icon={icon.icon} style={icon.size} /></div>
-				{/each}
-			</div>
-			<nav>
-				<h4>
-					<Link href={getMainMenuItemURL()} variant="tertiary" underline={false}>
-						{activeNav}
-					</Link>
-				</h4>
-				<ul>
-					{#each getActiveSubmenu() as item}
-						<li>
-							<Link href={item.url} variant="secondary" underline={false}>
-								{item.label}
-							</Link>
-						</li>
-					{/each}
-				</ul>
-			</nav>
-		</div>
-
-	</div>
-</header>
-
-<style>
-	@media (--xs-up) {
-		header {
-			position: sticky;
-			top: 0;
-			background-color: var(--black);
-			z-index: 100;
-
-			& .header-content {
-				display: flex;
-				justify-content: space-between;
-				/* The hero image is 1536px wide. So I want to give the content a max width that equals the --xl-max media query. */
-				max-width: 1535px;
-				margin: 0 auto;
-				padding: 0 15px;
-				display: flex;
-				align-items: center;
-				color: var(--white);
-				position: relative;
-
-				& .logo-wrapper {
-					padding: 12px 0;
-
-					& .logo {
-						height: 35px;
-					}
-				}
-
-				& .main-nav-container, & .subnav-container {
-					display: flex;
-					flex-direction: column;
-					position: absolute;
-					top: 0;
-					right: 110vw;
-					width: 100vw;
-					height: 100vh;
-					padding: 15px;
-					background-color: var(--black);
-					z-index: 100;
-					transition: right 0.25s ease;
-
-					& .menu-top-btns {
-						display: flex;
-						justify-content: space-between;
-						margin-bottom: 15px;
-					}
-
-					& .icons-wrapper {
-						display: flex;
-						justify-content: space-around;
-						align-items: center;
-						margin-bottom: 20px;
-
-						& :global(.icon--material-symbols:hover) {
-							color: var(--old-gold);
-						}
-					}
-
-					& nav {
-						flex: 1;
-						overflow-y: auto;
-
-						& h4 {
-							padding: 0 10px;
-						}
-
-						& ul {
-							list-style-type: none;
-							padding: 0;
-							font-size: var(--size-5);
-
-							& li {
-								margin: 0;
-								padding: 10px;
-
-								&:hover {
-									color: var(--old-gold);
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-
-	@media (--lg-up) {
-		header {
-			/* position: sticky;
-			top: 0;
-			background-color: var(--black); */
-
-			& .header-content {
-				/* The hero image is 1536px wide. So I want to give the content a max width that equals the --xl-max media query. */
-				max-width: 1535px;
-				margin: 0 auto;
-				padding: 0 15px;
-				display: flex;
-				align-items: center;
-				color: var(--white);
-
-				& .logo-wrapper {
-					padding: 12px 0;
-
-					& .logo {
-						height: 40px;
-					}
-				}
-
-				& nav {
-					flex: 1;
-
-					& ul {
-						display: flex;
-						justify-content: center;
-						gap: 0 20px;
-						list-style-type: none;
-						padding: 0;
-						font-size: 20px;
-
-						& li {
-							margin: 0;
-
-							&:hover {
-								color: var(--old-gold);
-							}
-						}
-					}
-				}
-
-				& .icons-wrapper {
-					display: flex;
-					align-items: center;
-					gap: 0 20px;
-
-					& :global(.icon--material-symbols:hover) {
-						color: var(--old-gold);
-					}
-				}
-			}
-		}
-	}
-</style>
-
-<!-- <div class="mobile-header-nav-wrapper">
-	<header>
-		<div class="mobile-main-nav-btn-wrapper">
-			{#if showMainNav}
-				<Button
-					onclick={() => (showMainNav = false)}
-				>
-					<Icon icon="mdi:close" width="40" color="var(--white)" />
-				</Button>
-			{:else}
-				<Button
-					onclick={() => (showMainNav = true)}
-				>
-					<Icon icon="mdi:menu" width="40" color="var(--white)" />
-				</Button>
-			{/if}
-		</div>
-		<div class="logo-wrapper">
-			<a href="/"><img src={Logo} class="logo" alt="logo" /></a>
-		</div>
-		I might use this <div class="spacer"> element until I am ready to include the login button for the app.
-		TODO: At that point I will delete this <div class="spacer"> element.
-		<div class="spacer">
-			<Icon icon="mdi:menu" width="40" color="transparent" />
-		</div>
-	</header>
-
-	{#if showMainNav}
-		<div class="main-nav-wrapper">
-			<MainNav />
-		</div>
-	{/if}
-</div> -->
-
-<!-- <style>
-	@media (--xs-up) {
-		.mobile-header-nav-wrapper {
-			position: fixed;
-			top: 0;
-			left: 0;
-			right: 0;
-			z-index: 50;
-
-			& header {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				padding: 10px;
-				background-color: var(--secondary-bg);
-				box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.5);
-
-				& .logo {
-					height: 40px;
-				}
-			}
-		}
-	}
-</style> -->
+<MobileHeader {mainNav} />
+<DesktopHeader {mainNav} />
