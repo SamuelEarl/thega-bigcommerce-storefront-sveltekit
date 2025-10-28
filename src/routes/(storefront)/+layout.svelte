@@ -53,61 +53,6 @@
 			flex-direction: column;
 			min-height: 100vh;
 
-      /* & header {
-        position: sticky;
-        top: 0;
-        background-color: var(--black);
-
-        & .header-content {
-          The hero image is 1536px wide. So I want to give the content a max width that equals the --xl-max media query.
-          max-width: 1535px;
-          margin: 0 auto;
-          padding: 0 15px;
-          display: flex;
-          align-items: center;
-          color: var(--white);
-
-          & .logo-wrapper {
-            padding: 12px 0;
-
-            & .logo {
-              height: 40px;
-            }
-          }
-
-          & nav {
-            flex: 1;
-
-            & ul {
-              display: flex;
-              justify-content: center;
-              gap: 0 20px;
-              list-style-type: none;
-              padding: 0;
-              font-size: 20px;
-
-              & li {
-                margin: 0;
-
-                &:hover {
-                  color: var(--old-gold);
-                }
-              }
-            }
-          }
-
-          .icons-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 0 20px;
-
-            & :global(.icon--material-symbols:hover) {
-              color: var(--old-gold);
-            }
-          }
-        }
-      } */
-
 			& main {
         flex: 1;
 				height: 100vh;
@@ -115,7 +60,7 @@
         background-color: var(--white);
 
         & .main-content {
-          max-width: 1535px;
+          max-width: var(--xl-max);
           margin: 0 auto;
           padding: 0 15px;
           padding-top: var(--size-6);
@@ -125,7 +70,7 @@
       & footer {
 
         & .footer-content {
-          max-width: 1535px;
+          max-width: var(--xl-max);
           margin: 0 auto;
           padding: 0 15px;
         }

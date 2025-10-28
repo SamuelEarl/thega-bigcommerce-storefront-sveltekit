@@ -75,3 +75,21 @@ NOTES:
 @custom-media --xl-max (max-width: 1535px);
 
 @custom-media --xxl-up (min-width: 1536px);
+
+/* ----------------------- */
+/* MEDIA QUERIES VARIABLES */
+/* ----------------------- */
+/* These variables are the same as the media query @custom-media values. */
+/* These can be used to set widths for elements that are responsively designed. */
+:where(html) {
+  --xs-min: 0px;
+  --xs-max: 639px;
+  --sm-min: 640px;
+  --sm-max: 767px;
+  --md-min: 768px;
+  --md-max: 1023px;
+  --lg-min: 1024px;
+  --lg-max: 1279px;
+  --xl-min: 1280px;
+  --xl-max: 1535px;
+}

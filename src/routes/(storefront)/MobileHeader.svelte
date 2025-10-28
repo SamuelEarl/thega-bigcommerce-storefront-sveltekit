@@ -186,7 +186,7 @@
 				justify-content: space-between;
 				/* The hero image is 1536px wide. So I want to give the content a max width that equals the --xl-max media query. */
 				/* TODO: Fix this max-width for the mobile image sizes. */
-				max-width: 1535px;
+				max-width: var(--xl-max);
 				margin: 0 auto;
 				padding: 0 15px;
 				display: flex;

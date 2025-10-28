@@ -11,8 +11,12 @@
     mainNav
   }: Props = $props();
 
-	let desktopMainNavContainerRef: HTMLDivElement;
-	let desktopMegaMenuContainerRef: HTMLDivElement;
+	let desktopMainNavRef: HTMLElement;
+	let desktopMegaMenuContainerRef: HTMLElement;
+	let desktopMegaMenuNavRef: HTMLElement;
+
+	let userIsFocusedOnDesktopMainNavRef = $state(false);
+	let userIsFocusedOnDesktopMegaMenuContainerRef = $state(false);
 
 	let activeMegaMenu = $state("");
 
@@ -34,63 +38,114 @@
 		},
 	];
 
-	function getActiveSubmenu() {
-		const displayNav = mainNav.menu.find(menu => menu.label === activeMegaMenu);
-		return displayNav?.submenu;
+	function getActiveMegaMenu() {
+		const megaMenu = mainNav.menu.find(menu => menu.label === activeMegaMenu);
+		return megaMenu?.submenu;
 	}
 
-	function getMainMenuItemURL() {
-		const displayNav = mainNav.menu.find(menu => menu.label === activeMegaMenu);
-		return displayNav?.url;
+	// function getMainMenuItemURL() {
+	// 	const displayNav = mainNav.menu.find(menu => menu.label === activeMegaMenu);
+	// 	return displayNav?.url;
+	// }
+
+	/**
+	 * If the user hovered (or focused their keyboard event) somewhere outside of the main nav AND mega menu,
+	 * then hide the mega menu.
+	 * @param event
+	 */
+	function checkIfUserIsFocusedOnMenu() {
+		if (!userIsFocusedOnDesktopMainNavRef && !userIsFocusedOnDesktopMegaMenuContainerRef) {
+			activeMegaMenu = "";
+			desktopMegaMenuNavRef.style.top = "-100vh";
+		}
+		else {
+			desktopMegaMenuNavRef.style.top = "-1px";
+		}
 	}
 </script>
 
 <header class="desktop-header">
-	<div class="header-content">
-		<div class="main-nav-container" bind:this={desktopMainNavContainerRef}>
-			<div class="logo-wrapper">
-				<a href="/"><img src={LogoWhite} class="logo" alt="logo" /></a>
-			</div>
-		
-			<nav>
-				<ul>
-					{#each mainNav.menu as item}	
-						<li
-							onmouseover={() => activeMegaMenu = item.label}
-							onfocus={() => activeMegaMenu = item.label}
-							onmouseout={() => activeMegaMenu = ""}
-							onblur={() => activeMegaMenu = ""}
-						>
-							<a href={item.url}>{item.label}</a>
-						</li>
-					{/each}
-				</ul>
-			</nav>
-
-			<div class="icons-wrapper">
-				{#each iconBtns as icon}
-					<div><Icon icon={icon.icon} style={icon.size} /></div>
+	<div class="main-nav-container">
+		<div class="logo-wrapper">
+			<a href="/"><img src={LogoWhite} class="logo" alt="logo" /></a>
+		</div>
+	
+		<nav
+			bind:this={desktopMainNavRef}
+			onmouseout={() => {
+				userIsFocusedOnDesktopMainNavRef = false;
+				checkIfUserIsFocusedOnMenu();
+			}}
+			onblur={() => {
+				userIsFocusedOnDesktopMainNavRef = false;
+				checkIfUserIsFocusedOnMenu();
+			}}
+		>
+			<ul>
+				{#each mainNav.menu as item}	
+					<li
+						onmouseover={() => {
+							activeMegaMenu = item.label;
+							userIsFocusedOnDesktopMainNavRef = true;
+							checkIfUserIsFocusedOnMenu();
+						}}
+						onfocus={() => {
+							activeMegaMenu = item.label;
+							userIsFocusedOnDesktopMainNavRef = true;
+							checkIfUserIsFocusedOnMenu();
+						}}
+					>
+						<a href={item.url}>
+							{item.label}
+						</a>
+					</li>
 				{/each}
-			</div>
-		</div>
+			</ul>
+		</nav>
 
-		<div class="mega-menu-container" bind:this={desktopMegaMenuContainerRef}>
-			<nav>
-				<ul>
-					<!-- {#each getActiveSubmenu() as item}
-						<li>
-							<Link href={item.url} variant="secondary" underline={false}>
-								{item.label}
-							</Link>
-						</li>
-					{/each} -->
-					<li>Mega Menu</li>
-					<li>Goes here</li>
-				</ul>
-			</nav>
+		<div class="icons-wrapper">
+			{#each iconBtns as icon}
+				<div><Icon icon={icon.icon} style={icon.size} /></div>
+			{/each}
 		</div>
-
 	</div>
+
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
+	<div
+		class="mega-menu-container"
+		bind:this={desktopMegaMenuContainerRef}
+		onmouseover={() => {
+			userIsFocusedOnDesktopMegaMenuContainerRef = true;
+			checkIfUserIsFocusedOnMenu();
+		}}
+		onfocus={() => {
+			userIsFocusedOnDesktopMegaMenuContainerRef = true;
+			checkIfUserIsFocusedOnMenu();
+		}}
+		onmouseout={() => {
+			userIsFocusedOnDesktopMegaMenuContainerRef = false;
+			checkIfUserIsFocusedOnMenu();
+		}}
+		onblur={() => {
+			userIsFocusedOnDesktopMegaMenuContainerRef = false;
+			checkIfUserIsFocusedOnMenu();
+		}}
+	>
+		<nav bind:this={desktopMegaMenuNavRef}>
+			<ul>
+				<li>Mega Menu</li>
+				<li>Goes here</li>
+				{#each getActiveMegaMenu() as item}
+					<li>
+						<Link href={item.url} variant="secondary" underline={false}>
+							{item.label}
+						</Link>
+					</li>
+				{/each}
+			</ul>
+		</nav>
+	</div>
+
 </header>
 
 <style>
@@ -106,71 +161,72 @@
 			position: sticky;
 			top: 0;
 			background-color: var(--black);
+			color: var(--white);
+			z-index: 100;
 
-			& .header-content {
+			& .main-nav-container {
 				/* The hero image is 1536px wide. So I want to give the content a max width that equals the --xl-max media query. */
-				max-width: 1535px;
+				max-width: var(--xl-max);
 				margin: 0 auto;
 				padding: 0 15px;
+				/* width: 100%; */
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
 
-				& .main-nav-container {
-					width: 100%;
-					display: flex;
-					justify-content: space-between;
-					align-items: center;
-					color: var(--white);
+				& .logo-wrapper {
 
-					& .logo-wrapper {
-						padding: 12px 0;
-
-						& .logo {
-							height: 40px;
-						}
+					& .logo {
+						height: 40px;
 					}
+				}
 
-					& nav {
-						flex: 1;
+				& nav {
+					flex: 1;
 
-						& ul {
-							display: flex;
-							justify-content: center;
-							gap: 0 20px;
-							list-style-type: none;
-							padding: 0;
-							font-size: 20px;
-
-							& li {
-								margin: 0;
-
-								&:hover {
-									color: var(--old-gold);
-								}
-							}
-						}
-					}
-
-					& .icons-wrapper {
+					& ul {
 						display: flex;
-						align-items: center;
+						justify-content: center;
 						gap: 0 20px;
+						list-style-type: none;
+						padding: 0;
+						margin: 0;
+						font-size: 20px;
 
-						& :global(.icon--material-symbols:hover) {
-							color: var(--old-gold);
+						& li {
+							margin: 0;
+							padding: 15px 0;
+
+							&:hover {
+								color: var(--old-gold);
+							}
 						}
 					}
 				}
 
-				& .mega-menu-container {
-					/* display: none; */
-					position: relative;
-					z-index: 100;
+				& .icons-wrapper {
+					display: flex;
+					align-items: center;
+					gap: 0 20px;
 
-					& nav {
-						position: absolute;
-						top: 0;
-						width: 100%;
-						background-color: var(--old-gold);
+					& :global(.icon--material-symbols:hover) {
+						color: var(--old-gold);
 					}
+				}
+			}
+
+			& .mega-menu-container {
+				max-width: var(--xl-max);
+				margin: 0 auto;
+				padding: 0 15px;
+				position: relative;
+
+				& nav {
+					position: absolute;
+					top: -100vh;
+					width: 100%;
+					background-color: var(--black);
+					color: var(--white);
 				}
 			}
 		}

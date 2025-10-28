@@ -109,7 +109,7 @@ For reference, here are the viewport sizes of some common devices:
 
 By default the column widths are auto-calculated based on the size of the content within them. However, you can pass the `equalColWidths` prop to the `<Grid>` component to make the columns equal widths.
 
-If you pass the `contain` prop to a `<Grid>` component, then the `<Grid>` will be centered on the screen and the content within the `<Grid>` will not spread any wider across the screen than the `--width-lg` value from the `theme.css` file.
+If you pass the `contain` prop to a `<Grid>` component, then the `<Grid>` will be centered on the screen and the content within the `<Grid>` will not spread any wider across the screen than the `--lg-min` value from the `media-queries.css` file.
 
 <Grid
   gap={{r:40, c:20}}
@@ -307,7 +307,7 @@ You can move columns up to 11 columns to the right by passing empty `<Col>` comp
     | --------- | ---- | --------------- | ------------- | ----------- |
     | `gap` | `{ r: number, c: number }` | Any number can be used for `r` and `c` | `{ r: 0, c: 0 }` | Similar to the `gap` property in CSS grids, this will provide space between the rows (`r`) and columns (`c`) of the grid. The number(s) that are passed to this prop represent the number of pixels between the rows and/or columns in the grid. |
     | `equalColWidths` | `boolean` | `true`, `false` | `false` | If you do not set any column breakpoint values, then the widths of each column will be auto-calculated based on the content in each column. However, if you want the column widths to be equal, then you can pass the `equalColWidths` prop to the `<Grid>` component. NOTE: The column breakpoint values will override the `equalColWidths` prop if both are set. |
-    | `contain` | `boolean` | `true`, `false` | `false` | If you pass the `contain` prop to a `<Grid>` component, then the `<Grid>` will be centered on the screen and the content within the `<Grid>` will not spread any wider across the screen than the `--width-lg` value from the `theme.css` file. |
+    | `contain` | `boolean` | `true`, `false` | `false` | If you pass the `contain` prop to a `<Grid>` component, then the `<Grid>` will be centered on the screen and the content within the `<Grid>` will not spread any wider across the screen than the `--lg-min` value from the `media-queries.css` file. |
   </TabPanel>
 
   <TabPanel>
