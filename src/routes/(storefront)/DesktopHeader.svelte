@@ -12,13 +12,14 @@
   }: Props = $props();
 
 	let desktopMainNavRef: HTMLElement;
-	let desktopMegaMenuContainerRef: HTMLElement;
+	let desktopMegaMenuOuterContainerRef: HTMLElement;
+	let desktopMegaMenuInnerContainerRef: HTMLElement;
 	let desktopMegaMenuNavRef: HTMLElement;
 
 	let userIsFocusedOnDesktopMainNavRef = $state(false);
-	let userIsFocusedOnDesktopMegaMenuContainerRef = $state(false);
+	let userIsFocusedOnDesktopMegaMenuOuterContainerRef = $state(false);
 
-	let activeMegaMenu = $state("");
+	let activeMegaMenu = $state([]);
 
 	const iconBtns = [
 		{
@@ -38,15 +39,10 @@
 		},
 	];
 
-	function getActiveMegaMenu() {
-		const megaMenu = mainNav.menu.find(menu => menu.label === activeMegaMenu);
-		return megaMenu?.submenu;
+	function setActiveMegaMenu(menuLabel: string) {
+		const menu = mainNav.menu.find(menu => menu.label === menuLabel);
+		activeMegaMenu = menu?.submenu;
 	}
-
-	// function getMainMenuItemURL() {
-	// 	const displayNav = mainNav.menu.find(menu => menu.label === activeMegaMenu);
-	// 	return displayNav?.url;
-	// }
 
 	/**
 	 * If the user hovered (or focused their keyboard event) somewhere outside of the main nav AND mega menu,
@@ -54,12 +50,11 @@
 	 * @param event
 	 */
 	function checkIfUserIsFocusedOnMenu() {
-		if (!userIsFocusedOnDesktopMainNavRef && !userIsFocusedOnDesktopMegaMenuContainerRef) {
-			activeMegaMenu = "";
-			desktopMegaMenuNavRef.style.top = "-100vh";
+		if (!userIsFocusedOnDesktopMainNavRef && !userIsFocusedOnDesktopMegaMenuOuterContainerRef) {
+			desktopMegaMenuInnerContainerRef.style.top = "-100vh";
 		}
 		else {
-			desktopMegaMenuNavRef.style.top = "-1px";
+			desktopMegaMenuInnerContainerRef.style.top = "-1px";
 		}
 	}
 </script>
@@ -85,12 +80,12 @@
 				{#each mainNav.menu as item}	
 					<li
 						onmouseover={() => {
-							activeMegaMenu = item.label;
+							setActiveMegaMenu(item.label);
 							userIsFocusedOnDesktopMainNavRef = true;
 							checkIfUserIsFocusedOnMenu();
 						}}
 						onfocus={() => {
-							activeMegaMenu = item.label;
+							setActiveMegaMenu(item.label);
 							userIsFocusedOnDesktopMainNavRef = true;
 							checkIfUserIsFocusedOnMenu();
 						}}
@@ -112,38 +107,47 @@
 
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<div
-		class="mega-menu-container"
-		bind:this={desktopMegaMenuContainerRef}
+		class="mega-menu-outer-container"
+		bind:this={desktopMegaMenuOuterContainerRef}
 		onmouseover={() => {
-			userIsFocusedOnDesktopMegaMenuContainerRef = true;
+			userIsFocusedOnDesktopMegaMenuOuterContainerRef = true;
 			checkIfUserIsFocusedOnMenu();
 		}}
 		onfocus={() => {
-			userIsFocusedOnDesktopMegaMenuContainerRef = true;
+			userIsFocusedOnDesktopMegaMenuOuterContainerRef = true;
 			checkIfUserIsFocusedOnMenu();
 		}}
 		onmouseout={() => {
-			userIsFocusedOnDesktopMegaMenuContainerRef = false;
+			userIsFocusedOnDesktopMegaMenuOuterContainerRef = false;
 			checkIfUserIsFocusedOnMenu();
 		}}
 		onblur={() => {
-			userIsFocusedOnDesktopMegaMenuContainerRef = false;
+			userIsFocusedOnDesktopMegaMenuOuterContainerRef = false;
 			checkIfUserIsFocusedOnMenu();
 		}}
 	>
-		<nav bind:this={desktopMegaMenuNavRef}>
-			<ul>
-				<li>Mega Menu</li>
-				<li>Goes here</li>
-				{#each getActiveMegaMenu() as item}
-					<li>
-						<Link href={item.url} variant="secondary" underline={false}>
-							{item.label}
-						</Link>
-					</li>
-				{/each}
-			</ul>
-		</nav>
+		<!-- ontransitionstart={() => {
+			desktopMegaMenuOuterContainerRef.style.pointerEvents = "none";
+		}}
+		ontransitionend={() => {
+			desktopMegaMenuOuterContainerRef.style.pointerEvents = "auto";
+		}} -->
+		<div 
+			bind:this={desktopMegaMenuInnerContainerRef}
+			class="mega-menu-inner-container"
+		>
+			<nav bind:this={desktopMegaMenuNavRef}>
+				<ul>
+					{#each activeMegaMenu as item}
+						<li>
+							<Link href={item.url} variant="secondary" underline={false}>
+								{item.label}
+							</Link>
+						</li>
+					{/each}
+				</ul>
+			</nav>
+		</div>
 	</div>
 
 </header>
@@ -156,6 +160,12 @@
 	}
 
 	@media (--lg-up) {
+		ul {
+			list-style-type: none;
+			padding: 0;
+			margin: 0;
+		}
+
 		header.desktop-header {
 			display: block;
 			position: sticky;
@@ -169,7 +179,6 @@
 				max-width: var(--xl-max);
 				margin: 0 auto;
 				padding: 0 15px;
-				/* width: 100%; */
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
@@ -187,15 +196,11 @@
 					& ul {
 						display: flex;
 						justify-content: center;
-						gap: 0 20px;
-						list-style-type: none;
-						padding: 0;
-						margin: 0;
-						font-size: 20px;
+						font-size: var(--size-5);
 
 						& li {
 							margin: 0;
-							padding: 15px 0;
+							padding: var(--size-4) var(--size-6);
 
 							&:hover {
 								color: var(--old-gold);
@@ -207,7 +212,7 @@
 				& .icons-wrapper {
 					display: flex;
 					align-items: center;
-					gap: 0 20px;
+					gap: 0 var(--size-5);
 
 					& :global(.icon--material-symbols:hover) {
 						color: var(--old-gold);
@@ -215,18 +220,24 @@
 				}
 			}
 
-			& .mega-menu-container {
-				max-width: var(--xl-max);
-				margin: 0 auto;
-				padding: 0 15px;
+			& .mega-menu-outer-container {
 				position: relative;
 
-				& nav {
+				& .mega-menu-inner-container {
 					position: absolute;
+					/* To edit the mega menu styles, comment out this `top: -100vh;` property and the 
+					`desktopMegaMenuInnerContainerRef.style.top = "-100vh";` line in the JavaScript code. */
 					top: -100vh;
-					width: 100%;
+					width: 100vw;
 					background-color: var(--black);
 					color: var(--white);
+					/* transition: top 0.25s ease; */
+
+					& nav {
+						max-width: var(--sm-max);
+						margin: 0 auto;
+						padding: 20px;
+					}
 				}
 			}
 		}

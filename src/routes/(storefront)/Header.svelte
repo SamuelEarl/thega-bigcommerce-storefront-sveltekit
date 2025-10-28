@@ -15,8 +15,8 @@
 						url: "/men/shoes",
 					},
 					{
-						label: "Shirts",
-						url: "/men/shirts",
+						label: "Polos",
+						url: "/men/polos",
 					},
 				],
 			},
@@ -29,8 +29,8 @@
 						url: "/women/shoes",
 					},
 					{
-						label: "Shirts",
-						url: "/women/shirts",
+						label: "Sweats",
+						url: "/women/sweats",
 					},
 				],
 			},
@@ -46,6 +46,14 @@
 						label: "Shirts",
 						url: "/boys/shirts",
 					},
+          {
+						label: "Shorts",
+						url: "/boys/shorts",
+					},
+          {
+						label: "Sweats",
+						url: "/women/sweats",
+					},
 				],
 			},
 			{
@@ -59,6 +67,10 @@
 					{
 						label: "Shirts",
 						url: "/girls/shirts",
+					},
+          {
+						label: "Pants",
+						url: "/boys/pants",
 					},
 				],
 			},

@@ -42,13 +42,13 @@
 	];
 
 	function getActiveSubmenu() {
-		const displayNav = mainNav.menu.find(menu => menu.label === activeNav);
-		return displayNav?.submenu;
+		const menu = mainNav.menu.find(menu => menu.label === activeNav);
+		return menu?.submenu;
 	}
 
 	function getMainMenuItemURL() {
-		const displayNav = mainNav.menu.find(menu => menu.label === activeNav);
-		return displayNav?.url;
+		const menu = mainNav.menu.find(menu => menu.label === activeNav);
+		return menu?.url;
 	}
 </script>
 
