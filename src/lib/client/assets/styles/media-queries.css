@@ -1,14 +1,19 @@
 /*
 ----------------------------
-Media Queries
+MEDIA QUERIES
 ----------------------------
-This file contains the Custom Media Queries (https://www.w3.org/TR/mediaqueries-5/#custom-mq) that can be used for your breakpoints.
+This file contains the Custom Media Queries (https://www.w3.org/TR/mediaqueries-5/#custom-mq) that can be used for your breakpoints and resolution densities.
 
 NOTE: This file is not imported into the main.css file. Rather, it has to be imported into the `/svelte.config.js` file so it can be processed by PostCSS. Once `@custom-media` queries become a well-supported standard, then I could import this into the main.css file.
+*/
 
-----------------
+/*
+----------------------------
+Breakpoints
+----------------------------
+----------------------------
 Usage examples:
-----------------
+----------------------------
 
 @media (--xs-up) {
   .selector {
@@ -76,10 +81,44 @@ NOTES:
 
 @custom-media --xxl-up (min-width: 1536px);
 
+
+/*
+----------------------------
+Resolution Densities
+
+You can use a breakpoint media query in combination with a resolution media query for the `background-image` property so standard displays will download standard resolution images and HiDPI displays (a.k.a. retina displays) will download higher resolution images.
+----------------------------
+----------------------------
+Usage example:
+----------------------------
+
+@media (--xs-up) {
+  @media (--standard-res) {
+    .hero-image {
+      background-image: url("src/lib/client/assets/images/standard-res-image.webp");
+    }
+  }
+
+  @media (--high-res) {
+    .hero-image {
+      background-image: url("src/lib/client/assets/images/high-res-image.webp");
+    }
+  }
+}
+
+NOTES:
+* The images for retina displays need to be 2x resolution, which means that the image has twice the width and twice the height of a standard "1x" image, resulting in a total of four times the number of pixels.
+* WebP now has broad support in the latest versions of major web browsers, so you can use .webp images throughout your web app. (See https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Formats/Image_types#webp_image.)
+* Use the Cache-Control header in your requests to tell the browser to hang on to images so that if the same image is needed again, the browser doesn’t have to go over the network to get it, which is a massive performance boost for repeat viewings. (See https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching.)
+*/
+@custom-media --standard-res (max-resolution: 191dpi);
+@custom-media --high-res (min-resolution: 192dpi);
+
+
 /* ----------------------- */
 /* MEDIA QUERIES VARIABLES */
 /* ----------------------- */
-/* These variables are the same as the media query @custom-media values. */
+/* These variables are the same as the media query @custom-media values for breakpoints. */
 /* These can be used to set widths for elements that are responsively designed. */
 :where(html) {
   --xs-min: 0px;

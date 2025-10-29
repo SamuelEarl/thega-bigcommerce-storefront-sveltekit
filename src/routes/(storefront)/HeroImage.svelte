@@ -40,6 +40,37 @@
     }
   }
 
+  /* 
+    * Can I use only the (min-resolution: 192dpi) media query or do I also need to use (min-resolution: 2dppx)?
+
+    @media (--xs-up) {
+      @media (max-resolution: 191dpi), (max-resolution: 1.99dppx) {
+        .hero-image {
+          background-image: url("standard-res-image.webp");
+        }
+      }
+    
+      @media (min-resolution: 192dpi), (min-resolution: 2dppx) {
+        .hero-image {
+          background-image: url("high-res-image.webp");
+        }
+      }
+    }
+
+    @media (--xs-up) {
+      @media (--standard-display) {
+        .hero-image {
+          background-image: url("standard-res-image.webp");
+        }
+      }
+    
+      @media (--retina-display) {
+        .hero-image {
+          background-image: url("high-res-image.webp");
+        }
+      }
+    }
+  */
   @media (--xs-up) {
     .hero-image {
       /* height: 768px; */
