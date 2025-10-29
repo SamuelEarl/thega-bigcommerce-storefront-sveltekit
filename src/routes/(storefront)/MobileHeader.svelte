@@ -256,7 +256,7 @@
 		}
 	}
 
-	@media (--lg-up) {
+	@media (--xl-up) {
 		header.mobile-header {
 			display: none;
 		}

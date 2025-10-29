@@ -139,7 +139,7 @@
 		}
 	}
 
-	@media (--lg-up) {
+	@media (--xl-up) {
 		ul {
 			list-style-type: none;
 			padding: 0;

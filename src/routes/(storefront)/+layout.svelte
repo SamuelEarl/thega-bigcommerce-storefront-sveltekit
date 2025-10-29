@@ -78,7 +78,7 @@
 		}
 	}
 
-	@media (--lg-up) {
+	@media (--xl-up) {
 		/* .layout {
 			flex-direction: row;
 

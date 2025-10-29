@@ -50,7 +50,7 @@ For reference, here are the viewport sizes of some common devices:
 /*
 NOTES:
 (1) The preferred way to use media queries when creating style rules in your Svelte components is to use the @custom-media rules that have `up` in the name (e.g. --xs-up, --sm-up, etc). The `min` and `max` @custom-media rules are available for situations where you might need to create styles for only one viewport size. For example: @media (--xl-min) and (--xl-max) {...}
-(2) To be explicit with your CSS styles, please use the --xs-up @custom-media rule to define all base styles in your component. Then use the larger breakpoints to change styles for larger viewports, when necessary.
+(2) To be explicit with your CSS styles, please use the --xs-up @custom-media rule to define all base styles in your component. Then use the larger breakpoints to change styles for larger viewports, when necessary. This also helps to align the styles for different viewports with each other.
 (3) I usually create styles for the xs, md, and xl breakpoints and then use the other breakpoints for special or unique cases.
 */
 
