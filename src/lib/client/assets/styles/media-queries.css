@@ -106,10 +106,11 @@ Usage example:
   }
 }
 
-NOTES:
+IMAGE LOADING & PERFORMANCE NOTES:
 * The images for retina displays need to be 2x resolution, which means that the image has twice the width and twice the height of a standard "1x" image, resulting in a total of four times the number of pixels.
 * WebP now has broad support in the latest versions of major web browsers. If you don't need to support older browsers, then you can use WebP images throughout your web app instead of providing JPG or PNG fallbacks. (See https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Formats/Image_types#webp_image.)
-* Use the Cache-Control header in your requests to tell the browser to hang on to images so that if the same image is needed again, the browser doesn’t have to go over the network to get it, which is a massive performance boost for repeat viewings. (See https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching.)
+* Use the appropriate browser cache strategy for your app so that images load quickly. If your content does not change too often (i.e. if you are not a news site, for example), then make sure that your app will cache images in the user's browser. This way if the same image is needed again, the browser doesn't have to go over the network to get it, which is a massive performance boost for repeat viewings. Web browsers cache images by default, but you can change how the browser should cache images. Learn more at https://www.hostwinds.com/blog/what-is-browser-cache.
+* Implement lazy loading for images, which is how you can avoid loading all the images on a page at once. Lazy loading means waiting to download an image until it is in or near the viewport. So, for example, an image way far down the page won't load if the user never scrolls there.
 */
 @custom-media --standard-res (max-resolution: 191dpi);
 @custom-media --high-res (min-resolution: 192dpi);
