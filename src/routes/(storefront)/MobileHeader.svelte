@@ -232,10 +232,6 @@
 						flex: 1;
 						overflow-y: auto;
 
-						& h4 {
-							padding: 0 10px;
-						}
-
 						& ul {
 							list-style-type: none;
 							padding: 0;
@@ -251,6 +247,10 @@
 							}
 						}
 					}
+				}
+
+				& .subnav-container nav h4 {
+					padding: 0 10px;
 				}
 			}
 		}
