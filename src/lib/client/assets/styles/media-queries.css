@@ -108,7 +108,7 @@ Usage example:
 
 NOTES:
 * The images for retina displays need to be 2x resolution, which means that the image has twice the width and twice the height of a standard "1x" image, resulting in a total of four times the number of pixels.
-* WebP now has broad support in the latest versions of major web browsers, so you can use .webp images throughout your web app. (See https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Formats/Image_types#webp_image.)
+* WebP now has broad support in the latest versions of major web browsers. If you don't need to support older browsers, then you can use WebP images throughout your web app instead of providing JPG or PNG fallbacks. (See https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Formats/Image_types#webp_image.)
 * Use the Cache-Control header in your requests to tell the browser to hang on to images so that if the same image is needed again, the browser doesn’t have to go over the network to get it, which is a massive performance boost for repeat viewings. (See https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching.)
 */
 @custom-media --standard-res (max-resolution: 191dpi);
