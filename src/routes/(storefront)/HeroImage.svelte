@@ -61,7 +61,7 @@
       /* The height of the hero image is 100vh - the height of the <header> element. */
       height: calc(100vh - 59px);
       background-repeat: no-repeat;
-      background-position: top center;
+      background-position: top right 40%;
       background-size: cover;
       display: flex;
       flex-direction: column;
@@ -126,6 +126,7 @@
     }
 
     .hero-image-container {
+      background-position: top center;
 
       & .hero-content-container {
         padding-bottom: 120px;

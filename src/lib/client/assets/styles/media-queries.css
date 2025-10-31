@@ -2,7 +2,7 @@
 ----------------------------
 MEDIA QUERIES
 ----------------------------
-This file contains the Custom Media Queries (https://www.w3.org/TR/mediaqueries-5/#custom-mq) that can be used for your breakpoints and resolution densities.
+This file contains the Custom Media Queries (https://www.w3.org/TR/mediaqueries-5/#custom-mq) that can be used for your breakpoints and resolutions (i.e. testing pixel densities of output devices).
 
 NOTE: This file is not imported into the main.css file. Rather, it has to be imported into the `/svelte.config.js` file so it can be processed by PostCSS. Once `@custom-media` queries become a well-supported standard, then I could import this into the main.css file.
 */
@@ -84,7 +84,7 @@ NOTES:
 
 /*
 ----------------------------
-Resolution Densities
+Resolutions (i.e. testing pixel densities of output devices)
 
 You can use a breakpoint media query in combination with a resolution media query for the `background-image` property so standard displays will download standard resolution images and HiDPI displays (a.k.a. retina displays) will download higher resolution images.
 ----------------------------

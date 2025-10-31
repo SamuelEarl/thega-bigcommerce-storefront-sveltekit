@@ -18,10 +18,10 @@
 </script>
 
 <script lang="ts">
-  import MobileHeader from "./MobileHeader.svelte";
-  import DesktopHeader from "./DesktopHeader.svelte";
+  import HeaderMobile from "./HeaderMobile.svelte";
+  import HeaderDesktop from "./HeaderDesktop.svelte";
 
-  // TODO: Add an interface for mainNav and import it into the MobileHeader and DesktopHeader components.
+  // TODO: Add an interface for mainNav and import it into the HeaderMobile and HeaderDesktop components.
   const mainNav: IMenuItem[] = [
     {
       label: "MEN",
@@ -113,5 +113,5 @@
 	];
 </script>
 
-<MobileHeader {mainNav} {iconBtns} />
-<DesktopHeader {mainNav} {iconBtns} />
+<HeaderMobile {mainNav} {iconBtns} />
+<HeaderDesktop {mainNav} {iconBtns} />

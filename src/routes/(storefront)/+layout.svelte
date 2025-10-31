@@ -3,10 +3,9 @@
   import { page } from "$app/state";
 	import type { Snippet } from "svelte";
   import Header from "./Header.svelte";
-	import { Icon, Link } from "$lib/client/components";
+  import HeroImage from "./HeroImage.svelte";
+  import Footer from "./Footer.svelte";
 	import "$lib/client/assets/styles/main.css";
-  // import LogoWhite from "$lib/client/assets/images/logo-and-name-horizontal-white-fbfbfb.svg";
-	import HeroImage from "./HeroImage.svelte";
 
   interface Props {
     children?: Snippet;
@@ -44,6 +43,7 @@
       {@render children?.()}
     </div>
   </main>
+  <Footer />
 </div>
 
 <style>
@@ -62,18 +62,9 @@
         & .main-content {
           max-width: var(--xl-max);
           margin: 0 auto;
-          padding: 0 15px;
+          padding: 0 15px 40px 15px;
         }
 			}
-
-      & footer {
-
-        & .footer-content {
-          max-width: var(--xl-max);
-          margin: 0 auto;
-          padding: 0 15px;
-        }
-      }
 		}
 	}
 
