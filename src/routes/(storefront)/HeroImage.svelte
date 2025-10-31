@@ -26,7 +26,7 @@
   </div>
   <div class="icon-container">
     <Link href="#content-start" variant="secondary" underline={false}>
-      <Icon icon="material-symbols:arrow-cool-down" style="font-size: var(--size-20);" />
+      <Icon icon="material-symbols:arrow-cool-down" />
     </Link>
   </div>
 </div>
@@ -58,19 +58,17 @@
     }
 
     .hero-image-container {
-      width: 100%;
+      /* The height of the hero image is 100vh - the height of the <header> element. */
+      height: calc(100vh - 59px);
       background-repeat: no-repeat;
-      /* background-attachment: fixed; */
       background-position: top center;
       background-size: cover;
-      /* margin-bottom: 20px; */
       display: flex;
-      justify-content: end;
-      align-items: center;
+      flex-direction: column;
+      justify-content: flex-end;
       position: relative;
 
       & .hero-content-container {
-        margin-top: 160px;
         text-align: center;
         padding: 15px;
         padding-bottom: 20px;
@@ -82,13 +80,15 @@
           background-color: rgba(0, 0, 0, 0.45);
 
           h1 {
-            font-size: var(--size-10);
+            font-size: var(--size-9);
             font-weight: bold;
             margin: 0;
+            margin-bottom: var(--size-4);
           }
 
           p {
             font-size: var(--size-5);
+            margin-bottom: var(--size-5);
           }
 
           .cta {
@@ -99,14 +99,15 @@
       }
 
       & .icon-container {
-        display: none;
-        /* position: absolute;
-        bottom: 20px;
-        To place the icon in the center of the screen, calculate half the width of the icon and subtract that from 50vw.
-        left: calc(50vw - (var(--size-20) / 2));
+        position: absolute;
+        bottom: 0px;
+        right: 0;
         color: var(--white);
-        Name, duration, timing, iteration count
-        animation: bounce 3s ease infinite; */
+        animation: bounce 3s ease infinite;
+
+        & :global(.icon--material-symbols.icon--material-symbols--arrow-cool-down) {
+          font-size: var(--size-15);
+        }
       }
     }
   }
@@ -121,6 +122,35 @@
     @media (--high-res) {
       .hero-image-container {
         background-image: url("src/lib/client/assets/images/hero-image-optimized-md-high-res-2560x2560.webp");
+      }
+    }
+
+    .hero-image-container {
+
+      & .hero-content-container {
+        padding-bottom: 120px;
+
+        & .hero-content {
+
+          h1 {
+            font-size: var(--size-12);
+            margin-bottom: var(--size-5);
+          }
+
+          p {
+            font-size: var(--size-6);
+            margin-bottom: var(--size-7);
+          }
+        }
+      }
+
+      & .icon-container {
+        /* To place the icon in the center of the screen, calculate half the width of the icon and subtract that from 50vw. */
+        left: calc(50vw - (var(--size-20) / 2));
+
+        & :global(.icon--material-symbols.icon--material-symbols--arrow-cool-down) {
+          font-size: var(--size-20);
+        }
       }
     }
   }
@@ -141,47 +171,14 @@
     .hero-image-container {
       /* The height of the hero image is 100vh - the height of the <header> element. */
       height: calc(100vh - 62px);
-      background-repeat: no-repeat;
-      /* background-attachment: fixed; */
-      background-position: top center;
-      background-size: cover;
-      margin-bottom: 20px;
-      display: flex;
-      justify-content: end;
-      align-items: center;
-      position: relative;
+      flex-direction: row;
+      align-items: flex-end;
 
       & .hero-content-container {
-        margin-right: 100px;
-        text-align: center;
-        padding: 20px;
-        /* background-color: rgba(0, 0, 0, 0.2); */
-        color: var(--old-gold);
 
-        h1 {
-          font-size: var(--size-11);
-          font-weight: bold;
+        & .hero-content {
+          background-color: rgba(0, 0, 0, 0.15);
         }
-
-        p {
-          font-size: var(--size-6);
-        }
-
-        .cta {
-          display: flex;
-          justify-content: center;
-        }
-      }
-
-      & .icon-container {
-        display: block;
-        position: absolute;
-        bottom: 20px;
-        /* To place the icon in the center of the screen, calculate half the width of the icon and subtract that from 50vw. */
-        left: calc(50vw - (var(--size-20) / 2));
-        color: var(--white);
-        /* Name, duration, timing, iteration count */
-        animation: bounce 3s ease infinite;
       }
     }
   }

@@ -5,7 +5,7 @@
 <script lang="ts">
   interface Props {
     icon: string;
-    style: string;
+    style?: string;
   }
 
   let {
