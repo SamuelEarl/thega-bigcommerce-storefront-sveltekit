@@ -25,7 +25,7 @@
     </div>
   </div>
   <div class="icon-container">
-    <Link href="#content-start" variant="secondary" underline={false}>
+    <Link href="#home" variant="secondary" underline={false}>
       <Icon icon="material-symbols:arrow-cool-down" />
     </Link>
   </div>
