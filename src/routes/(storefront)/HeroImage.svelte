@@ -47,13 +47,13 @@
   @media (--xs-up) {
     @media (--standard-res) {
       .hero-image-container {
-        background-image: url("src/lib/client/assets/images/hero-image-optimized-xs-standard-res-768x800.webp");
+        background-image: url("/src/lib/client/assets/images/hero-image-optimized-xs-standard-res-768x800.webp");
       }
     }
 
     @media (--high-res) {
       .hero-image-container {
-        background-image: url("src/lib/client/assets/images/hero-image-optimized-xs-high-res-1536x1600.webp");
+        background-image: url("/src/lib/client/assets/images/hero-image-optimized-xs-high-res-1536x1600.webp");
       }
     }
 
@@ -115,13 +115,13 @@
   @media (--md-up) {
     @media (--standard-res) {
       .hero-image-container {
-        background-image: url("src/lib/client/assets/images/hero-image-optimized-md-standard-res-1280x1280.webp");
+        background-image: url("/src/lib/client/assets/images/hero-image-optimized-md-standard-res-1280x1280.webp");
       }
     }
 
     @media (--high-res) {
       .hero-image-container {
-        background-image: url("src/lib/client/assets/images/hero-image-optimized-md-high-res-2560x2560.webp");
+        background-image: url("/src/lib/client/assets/images/hero-image-optimized-md-high-res-2560x2560.webp");
       }
     }
 
@@ -159,13 +159,13 @@
   @media (--xl-up) {
     @media (--standard-res) {
       .hero-image-container {
-        background-image: url("src/lib/client/assets/images/hero-image-optimized-xl-standard-res-2000x800.webp");
+        background-image: url("/src/lib/client/assets/images/hero-image-optimized-xl-standard-res-2000x800.webp");
       }
     }
 
     @media (--high-res) {
       .hero-image-container {
-        background-image: url("src/lib/client/assets/images/hero-image-optimized-xl-high-res-4000x1600.webp");
+        background-image: url("/src/lib/client/assets/images/hero-image-optimized-xl-high-res-4000x1600.webp");
       }
     }
 

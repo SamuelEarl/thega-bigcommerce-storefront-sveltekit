@@ -39,12 +39,13 @@
       heading: "COMPANY INFO",
       items: [
         { label: "About Us", link: "/about-us" },
-        { label: "Contact Us", link: "/" },
-        { label: "Shipping & Delivery Policies", link: "/" },
-        { label: "Returns, Exchanges, Refunds", link: "/" },
-        { label: "FAQ", link: "/" },
-        { label: "Privacy Policy", link: "/" },
-        { label: "Terms of Service", link: "/" },
+        { label: "Contact Us", link: "/contact-us" },
+        { label: "Shipping & Delivery Policies", link: "/policies/shipping-and-delivery-policies" },
+        { label: "Returns, Exchanges, Refunds", link: "/policies/returns-exchanges-refunds" },
+        { label: "FAQ", link: "/faq" },
+        { label: "Privacy Policy", link: "/policies/privacy-policy" },
+        { label: "Terms of Service", link: "/policies/terms-of-service" },
+        // { label: "Your Privacy Choices", link: "/policies/your-privacy-choices" },
       ]
     },
   ];
