@@ -63,7 +63,6 @@
           max-width: var(--xl-max);
           margin: 0 auto;
           padding: 0 15px;
-          padding-top: var(--size-6);
         }
 			}
 

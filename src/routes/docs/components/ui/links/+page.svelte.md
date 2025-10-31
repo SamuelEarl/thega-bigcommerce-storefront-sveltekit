@@ -40,8 +40,8 @@ Also, if you want to style links to look like buttons, then this component makes
     btnStyles
     target="_blank"
   >
-    <Icon icon="ic:baseline-home" />
     Docs Home
+    <Icon icon="material-symbols:chevron-right" />
   </Link>
 </div>
 
@@ -49,10 +49,10 @@ Also, if you want to style links to look like buttons, then this component makes
 
 ```svelte
 <div>
-	<Link href="/docs/" btnStyles target="_blank">
-		<Icon icon="ic:baseline-home" />
-		Docs Home
-	</Link>
+  <Link href="/docs/" btnStyles target="_blank">
+    Docs Home
+    <Icon icon="material-symbols:chevron-right" />
+  </Link>
 </div>
 ```
 
@@ -95,10 +95,7 @@ Whatever you pass in between the opening `<Link>` tag and the closing `</Link>` 
     {/snippet}
   </Link>
 
-  <Button
-    inverted
-    onclick={() => isDisabled = !isDisabled}
-  >
+  <Button onclick={() => isDisabled = !isDisabled}>
     Click To Change Link
   </Button>
 </div>
@@ -107,26 +104,28 @@ Whatever you pass in between the opening `<Link>` tag and the closing `</Link>` 
 
 ```svelte
 <div style="display:flex; gap: 15px;">
-	<Link
-		href=""
-		btnStyles
-		colors={{
-			bg: "rgba(0, 0, 0, 0.1)",
-			fg: "red",
-			br: "red",
-			ol: "red",
-		}}
-		disabled={isDisabled}
-	>
-		Enabled Link
-		<Icon icon="mdi:check" />
-		{#snippet disabledContent()}
-			Disabled Link
-			<Icon icon="mdi:cancel" />
-		{/snippet}
-	</Link>
+  <Link
+    href=""
+    btnStyles
+    colors={{
+      bg: "rgba(0, 0, 0, 0.1)",
+      fg: "red",
+      br: "red",
+      ol: "red",
+    }}
+    disabled={isDisabled}
+  >
+    Enabled Link
+    <Icon icon="mdi:check" />
+    {#snippet disabledContent()}
+      Disabled Link
+      <Icon icon="mdi:cancel" />
+    {/snippet}
+  </Link>
 
-	<Button inverted onclick={() => (isDisabled = !isDisabled)}>Click To Change Link</Button>
+  <Button onclick={() => isDisabled = !isDisabled}>
+    Click To Change Link
+  </Button>
 </div>
 ```
 
@@ -171,7 +170,7 @@ Whatever you pass in between the opening `<Link>` tag and the closing `</Link>` 
       "<code>boolean</code>", 
       "<code>true</code>, <code>false</code>", 
       "<code>false</code>", 
-      "<code>false</code> will create a link that looks like a regular button. <code>true</code> will set the background to transparent and the text and border colors will be taken from the <code>variant</code> prop. NOTE: This prop only works when <code>btnStyles</code> is <code>true</code>."
+      "<code>false</code> will create a link that looks like a regular button. <code>true</code> will switch the background and foreground colors. NOTE: This prop only works when <code>btnStyles</code> is <code>true</code>."
     ],
     [
       "<code>colors</code>",
