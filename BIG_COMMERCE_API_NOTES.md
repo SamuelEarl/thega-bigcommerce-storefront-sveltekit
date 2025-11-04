@@ -6,6 +6,9 @@ These are notes that I have recorded while completing the steps in this page: ht
 
 This step: https://developer.bigcommerce.com/docs/storefront/headless/channels#create-the-channel
 
+* Store Hash: se4wyyruqj
+* Channel ID: 1800323
+
 * Go to https://developer.bigcommerce.com/docs/rest-management/channels#create-a-channel
 * The right column shows an example of how to create an eBay channel. If you click the "cURL" tab then you will see `[store_hash]` route param and a `{{token}}` value (for the `X-Auth-Token` header). Neither of those is defined. So where do you get those values? Follow these steps:
     * Click the "Try it" button in the top right corner (to the right of the "Create a Channel" header).
@@ -18,12 +21,12 @@ This step: https://developer.bigcommerce.com/docs/storefront/headless/channels#c
     * Click the "Save" button.
     * When you create an API account, you will automatically download a .txt file with the following data:
         * ACCESS TOKEN: snjiuwf33is8vx8exi32xfrh2jr629j
-        * CLIENT NAME: Headless Storefront API
+        * CLIENT NAME: Create a Channel
         * CLIENT ID: gl1e1cllahsq3itxykh3ytsopopelgg
         * CLIENT SECRET: 26c960a652bee278e9af1e79c9b3849c64454bafda016d25aa4a8929263bf89b
-        * NAME: Headless Storefront API
+        * NAME: Create a Channel
         * API PATH: https://api.bigcommerce.com/stores/se4wyyruqj/v3/
-    * You can get the `store_hash` value from the API PATH and the `{{token}}` value from the ACCESS TOKEN.
+    * You can get the `store_hash` value from the API PATH (se4wyyruqj) and the `{{token}}` value from the ACCESS TOKEN.
     * Back on the https://developer.bigcommerce.com/docs/rest-management/channels#create-a-channel page, scroll down to the "Body" heading and find the entries for "name", "platform", "type", and "status". 
         * These are the values that you need to pass in the curl command that you will send to create a custom storefront. 
         * You can read the documentation for each of those entries and you can also click the "valid combination" link to be taken to the https://developer.bigcommerce.com/docs/rest-management/channels page, where you can find out more about the data that needs to be passed to the BigCommerce API to create a custom storefront. 
@@ -39,6 +42,38 @@ This step: https://developer.bigcommerce.com/docs/storefront/headless/channels#c
         * The Channel ID is returned in the response, but you can also find the Channel ID in the storefront URL in the control panel under the Channels section. The Channel ID is the 7-digit number at the end of the subdomain.
         * NOTE: The "status" is initially set to "prelaunch", but you can change it to "active" from the control panel.
 
+### Create a Channel
+
+#### Request
+```
+curl --request POST \
+  --url 'https://api.bigcommerce.com/stores/se4wyyruqj/v3/channels' \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --header 'X-Auth-Token: bisd23iwekt90q7nmy43jae5xdrkp9e' \
+  --data '{"name":"THEGA - Custom Storefront","platform":"custom","type":"storefront","status":"prelaunch"}'
+```
+
+#### Response
+```
+{
+  "data":{
+    "id":1800323, # This is the Channel ID, which can also be found in the control panel under the Channels section.
+    "name":"THEGA - Custom Storefront",
+    "platform":"custom",
+    "type":"storefront",
+    "date_created":"2025-11-02T01:29:22Z",
+    "date_modified":"2025-11-02T01:29:22Z",
+    "external_id":"",
+    "icon_url":"https://s3.amazonaws.com/bc-channel-platform/channel-icons/custom.svg",
+    "is_listable_from_ui":true,
+    "is_enabled":true,
+    "is_visible":true,
+    "status":"prelaunch"
+  },
+  "meta":{}
+}
+```
 
 **NOTE: It looks like I can complete the rest of the steps in the control panel after I have created a channel for my custom storefront.**
 
@@ -57,6 +92,53 @@ curl --request POST \
   --header 'Content-Type: application/json' \
   --header 'X-Auth-Token: {{token}}' \
   --data '{"url":"https://thegasport.com/","channel_id":[channel_id]}'
+```
+
+### Create a Channel Site
+
+#### Request
+```
+curl --request POST \
+  --url 'https://api.bigcommerce.com/stores/se4wyyruqj/v3/channels/1800323/site' \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --header 'X-Auth-Token: cxceohh5p5mqf066j61xwxsm8e23kcl' \
+  --data '{"url":"https://thegasport.com/","channel_id":1800323}'
+```
+
+#### Response
+```
+{
+  "data": {
+    "id":1004,
+    "url":"https://thegasport.com",
+    "channel_id":1800323,
+    "created_at":"2025-11-02T01:29:24Z",
+    "updated_at":"2025-11-02T02:00:37Z",
+    "urls": [
+      {
+        "url":"https://store-se4wyyruqj-1800323.mybigcommerce.com",
+        "type":"canonical",
+        "created_at":"2025-11-02T01:29:24Z",
+        "updated_at":"2025-11-02T01:29:24Z"
+      },
+      {
+        "url":"https://thegasport.com",
+        "type":"primary",
+        "created_at":"2025-11-02T02:00:37Z",
+        "updated_at":"2025-11-02T02:00:37Z"
+      },
+      {
+        "url":"https://thega.mybigcommerce.com",
+        "type":"checkout",
+        "created_at":"2025-10-11T22:02:25Z",
+        "updated_at":"2025-10-11T22:02:25Z"
+      }
+    ],
+    "is_checkout_url_customized":false
+  },
+  "meta":{}
+}
 ```
 
 ## Add a checkout URL
