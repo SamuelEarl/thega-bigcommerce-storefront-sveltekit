@@ -13,6 +13,7 @@
 		"move_docs_to_root": "sh -c 'if [ -d src/routes/docs ]; then mv src/routes/docs docs; fi'",
 		"build": "bun move_docs_to_root && NODE_ENV='production' bun --env-file=.env --env-file=.env.production -- vite build",
 		"preview": "vite preview",
+		"start": "bun build/index.js",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",

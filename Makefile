@@ -4,6 +4,10 @@ run-dev:
 run-build:
 	bun --bun run build
 
+# Run the built app
+run-start:
+	bun --bun run start
+
 generate-css-icons:
 	bun --bun generate-css-icons.js
 
