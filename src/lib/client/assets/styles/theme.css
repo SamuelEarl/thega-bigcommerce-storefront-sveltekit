@@ -130,7 +130,7 @@
   --outline: var(--outline-width) var(--outline-style) var(--outline-color);
   --outline-offset: 3px;
   /* This style is not currently used, but I am leaving it here in case I want to add it to the :hover, :focus styles to add some animation. */
-  --outline-transition: all 0.1s linear; /* transition: var(--outline-transition); */
+  --outline-transition: all 0.1s linear; /* Usage Example: transition: var(--outline-transition); */
 
 
   /* ----- */

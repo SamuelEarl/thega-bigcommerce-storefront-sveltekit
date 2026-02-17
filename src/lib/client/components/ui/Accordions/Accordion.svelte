@@ -73,7 +73,7 @@
       id={panelId}
       class={`fp-accordion-panel ${panelClasses}`}
       class:fp-accordion-panel-border={panelBorder}
-      style={`padding-top: ${getAccordionPanelPaddingTop()}; padding-right: var(--size-${btnSizes.ph}); padding-bottom: var(--size-${btnSizes.pv}); padding-left: var(--size-${btnSizes.ph}); font-size: var(--size-${btnSizes.f}); background-color: ${panelBgColor};`}
+      style={`padding-top: ${getAccordionPanelPaddingTop()}; padding-right: var(--size-${btnSizes.ph}); padding-bottom: var(--size-${btnSizes.pv}); padding-left: var(--size-${btnSizes.ph}); font-size: var(--size-${btnSizes.fs}); background-color: ${panelBgColor};`}
       transition:slide
     >
       {@render children?.()}

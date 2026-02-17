@@ -1,4 +1,4 @@
-// This script file and instructions for using CSS icons are found here:
+// The code for this module and the instructions for using CSS icons are found here:
 // https://iconify.design/docs/usage/css/utils/
 
 // To update the CSS icons, run `bun --bun generate-css-icons.js` from the root directory or `make generate-css-icons`. This will update the `src/lib/client/assets/styles/icons.css` file.
