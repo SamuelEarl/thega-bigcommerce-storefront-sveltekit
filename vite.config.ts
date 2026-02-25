@@ -4,7 +4,7 @@ import { sveltekit } from "@sveltejs/kit/vite";
 
 export default defineConfig({
 	server: {
-		port: 3000,
+		port: 3333,
 	},
 	build: {
 		rollupOptions: {

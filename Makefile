@@ -13,6 +13,6 @@ build-preview:
 generate-css-icons:
 	bun --bun generate-css-icons.js
 
-# This will kill the process running on port 3000 on your local computer.
+# This will kill the process running on port 3333 on your local computer.
 kill:
-	fuser -k 3000/tcp
+	fuser -k 3333/tcp
